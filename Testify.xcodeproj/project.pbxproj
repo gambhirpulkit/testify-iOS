@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08823F3F9467FD9DC2695049 /* Pods_Testify.framework */; };
 		E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F11C46C61F0082B2B3 /* AppDelegate.swift */; };
 		E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F31C46C61F0082B2B3 /* ViewController.swift */; };
 		E59473F71C46C61F0082B2B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59473F51C46C61F0082B2B3 /* Main.storyboard */; };
@@ -14,6 +15,10 @@
 		E59473FC1C46C61F0082B2B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */; };
 		E59474071C46C61F0082B2B3 /* TestifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474061C46C61F0082B2B3 /* TestifyTests.swift */; };
 		E59474121C46C61F0082B2B3 /* TestifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474111C46C61F0082B2B3 /* TestifyUITests.swift */; };
+		E59474201C46E1720082B2B3 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E594741F1C46E1720082B2B3 /* LoginController.swift */; };
+		E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474211C46F1E80082B2B3 /* SignupController.swift */; };
+		E59474241C46F2130082B2B3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474231C46F2130082B2B3 /* HomeController.swift */; };
+		E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474251C46FD5F0082B2B3 /* configUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08823F3F9467FD9DC2695049 /* Pods_Testify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Testify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.debug.xcconfig"; sourceTree = "<group>"; };
+		35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.release.xcconfig"; sourceTree = "<group>"; };
 		E59473EE1C46C61F0082B2B3 /* Testify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59473F11C46C61F0082B2B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59473F31C46C61F0082B2B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +55,10 @@
 		E594740D1C46C61F0082B2B3 /* TestifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59474111C46C61F0082B2B3 /* TestifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestifyUITests.swift; sourceTree = "<group>"; };
 		E59474131C46C61F0082B2B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E594741F1C46E1720082B2B3 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		E59474211C46F1E80082B2B3 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		E59474231C46F2130082B2B3 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		E59474251C46FD5F0082B2B3 /* configUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configUrl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +87,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CD775D9BDF5FED83689046F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08823F3F9467FD9DC2695049 /* Pods_Testify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0F22B60E63566F52EB8F310 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */,
+				35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E59473E51C46C61F0082B2B3 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +111,8 @@
 				E59474051C46C61F0082B2B3 /* TestifyTests */,
 				E59474101C46C61F0082B2B3 /* TestifyUITests */,
 				E59473EF1C46C61F0082B2B3 /* Products */,
+				E0F22B60E63566F52EB8F310 /* Pods */,
+				1CD775D9BDF5FED83689046F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +131,10 @@
 			children = (
 				E59473F11C46C61F0082B2B3 /* AppDelegate.swift */,
 				E59473F31C46C61F0082B2B3 /* ViewController.swift */,
+				E594741F1C46E1720082B2B3 /* LoginController.swift */,
+				E59474211C46F1E80082B2B3 /* SignupController.swift */,
+				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
+				E59474231C46F2130082B2B3 /* HomeController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
 				E59473F81C46C61F0082B2B3 /* Assets.xcassets */,
 				E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */,
@@ -132,9 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E59474161C46C61F0082B2B3 /* Build configuration list for PBXNativeTarget "Testify" */;
 			buildPhases = (
+				A24FAAEA2F5EE12801924D87 /* Check Pods Manifest.lock */,
 				E59473EA1C46C61F0082B2B3 /* Sources */,
 				E59473EB1C46C61F0082B2B3 /* Frameworks */,
 				E59473EC1C46C61F0082B2B3 /* Resources */,
+				35F52B3E999021E9454C8672 /* Embed Pods Frameworks */,
+				E23F79A3BCDDF409C9AFE74D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,13 +293,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		35F52B3E999021E9454C8672 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Testify/Pods-Testify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A24FAAEA2F5EE12801924D87 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E23F79A3BCDDF409C9AFE74D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Testify/Pods-Testify-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E59473EA1C46C61F0082B2B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */,
+				E59474201C46E1720082B2B3 /* LoginController.swift in Sources */,
 				E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */,
+				E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */,
+				E59474241C46F2130082B2B3 /* HomeController.swift in Sources */,
+				E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +489,7 @@
 		};
 		E59474171C46C61F0082B2B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Testify/Info.plist;
@@ -409,6 +501,7 @@
 		};
 		E59474181C46C61F0082B2B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Testify/Info.plist;
@@ -485,6 +578,7 @@
 				E59474181C46C61F0082B2B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E59474191C46C61F0082B2B3 /* Build configuration list for PBXNativeTarget "TestifyTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +587,7 @@
 				E594741B1C46C61F0082B2B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E594741C1C46C61F0082B2B3 /* Build configuration list for PBXNativeTarget "TestifyUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +596,7 @@
 				E594741E1C46C61F0082B2B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
