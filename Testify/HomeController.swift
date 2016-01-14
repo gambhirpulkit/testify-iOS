@@ -15,10 +15,13 @@ class HomeController: UIViewController {
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        print(prefs.integerForKey("ISLOGGEDIN"))
         if (isLoggedIn != 1) {
             self.performSegueWithIdentifier("goto_login", sender: self)
         } else {
             //self.usernameLabel.text = prefs.valueForKey("USERNAME") as? String
+            //let appDomain = NSBundle.mainBundle().bundleIdentifier
+            //NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
         }
     }
     

@@ -19,6 +19,7 @@
 		E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474211C46F1E80082B2B3 /* SignupController.swift */; };
 		E59474241C46F2130082B2B3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474231C46F2130082B2B3 /* HomeController.swift */; };
 		E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474251C46FD5F0082B2B3 /* configUrl.swift */; };
+		E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E9C48F1C4835CE007674A0 /* LogoutController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E59474211C46F1E80082B2B3 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		E59474231C46F2130082B2B3 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		E59474251C46FD5F0082B2B3 /* configUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configUrl.swift; sourceTree = "<group>"; };
+		E5E9C48F1C4835CE007674A0 /* LogoutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				E59473F31C46C61F0082B2B3 /* ViewController.swift */,
 				E594741F1C46E1720082B2B3 /* LoginController.swift */,
 				E59474211C46F1E80082B2B3 /* SignupController.swift */,
+				E5E9C48F1C4835CE007674A0 /* LogoutController.swift */,
 				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
 				E59474231C46F2130082B2B3 /* HomeController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
@@ -352,6 +355,7 @@
 				E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */,
 				E59474241C46F2130082B2B3 /* HomeController.swift in Sources */,
 				E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */,
+				E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Testify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pulkitgambhir.Testify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -505,6 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Testify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pulkitgambhir.Testify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
