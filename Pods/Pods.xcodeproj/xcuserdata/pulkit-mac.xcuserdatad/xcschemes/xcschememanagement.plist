@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Player.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Testify.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>38A570699F4DAC6661A47663EF309CB1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>432ECC54282C84882B482CCB4CF227FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>7DDF79495F24B309AF089ACC99FC1151</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8651FF4945710AADE244F0D0F2F927DC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1E63A1BF93FD336FEC6B7950AA018F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

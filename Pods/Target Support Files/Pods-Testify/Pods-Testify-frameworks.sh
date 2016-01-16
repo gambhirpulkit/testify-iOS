@@ -86,10 +86,12 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Testify/Alamofire.framework"
   install_framework "Pods-Testify/Haneke.framework"
+  install_framework "Pods-Testify/Player.framework"
   install_framework "Pods-Testify/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Testify/Alamofire.framework"
   install_framework "Pods-Testify/Haneke.framework"
+  install_framework "Pods-Testify/Player.framework"
   install_framework "Pods-Testify/SwiftyJSON.framework"
 fi

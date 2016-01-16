@@ -7,6 +7,7 @@ target 'Testify' do
 	pod 'Alamofire'
 	pod 'SwiftyJSON'
 	pod 'HanekeSwift'
+	pod 'Player'
 end
 
 target 'TestifyTests' do

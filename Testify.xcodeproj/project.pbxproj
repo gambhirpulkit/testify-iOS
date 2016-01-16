@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08823F3F9467FD9DC2695049 /* Pods_Testify.framework */; };
+		E56E06A51C4AE94500F188DF /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E06A41C4AE94500F188DF /* VideoViewController.swift */; };
 		E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F11C46C61F0082B2B3 /* AppDelegate.swift */; };
 		E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F31C46C61F0082B2B3 /* ViewController.swift */; };
 		E59473F71C46C61F0082B2B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59473F51C46C61F0082B2B3 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		08823F3F9467FD9DC2695049 /* Pods_Testify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Testify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.debug.xcconfig"; sourceTree = "<group>"; };
 		35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.release.xcconfig"; sourceTree = "<group>"; };
+		E56E06A41C4AE94500F188DF /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		E59473EE1C46C61F0082B2B3 /* Testify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59473F11C46C61F0082B2B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59473F31C46C61F0082B2B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				E5E9C48F1C4835CE007674A0 /* LogoutController.swift */,
 				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
 				E59474231C46F2130082B2B3 /* HomeController.swift */,
+				E56E06A41C4AE94500F188DF /* VideoViewController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
 				E59473F81C46C61F0082B2B3 /* Assets.xcassets */,
 				E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */,
@@ -356,6 +359,7 @@
 				E59474241C46F2130082B2B3 /* HomeController.swift in Sources */,
 				E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */,
 				E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */,
+				E56E06A51C4AE94500F188DF /* VideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
