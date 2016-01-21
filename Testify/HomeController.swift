@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 import Haneke
-import MediaPlayer
+
 
 class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
@@ -21,10 +21,16 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     var lNameArr = [String]()
     var imgArr = [String]()
     var thumbImgArr = [String]()
+    var likesArr = [String]()
+    var cmntArr = [String]()
+    var shareArr = [String]()
+    var vidArr = [String]()
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
+        tableView.allowsSelection = false
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
@@ -49,11 +55,11 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let param = ["do": "AllVideos", "user_id": "159", "id": "0","status": "up"]
         
         Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
-            let swiftyJsonVar = JSON(responseData.result.value!)
+            
             
             switch responseData.result {
             case .Success:
-                
+                let swiftyJsonVar = JSON(responseData.result.value!)
                 
                 print("jsonResponse" ,swiftyJsonVar);
                 
@@ -78,6 +84,18 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                     }
                     if let thumbImg = subJson["thumb_path"].string {
                         self.thumbImgArr.append(thumbImg)
+                        
+                    }
+                    if let likeCount = subJson["like_count"].string {
+                        self.likesArr.append(likeCount)
+                        
+                    }
+                    if let cmntCount = subJson["comment_count"].string {
+                        self.cmntArr.append(cmntCount)
+                        
+                    }
+                    if let shareCount = subJson["share_count"].string {
+                        self.shareArr.append(shareCount)
                         
                     }
                     
@@ -112,11 +130,11 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         if let linkLabel = cell.viewWithTag(1) as? UILabel {
-            linkLabel.text = fNameArr[indexPath.row]
+            linkLabel.text = fNameArr[indexPath.row] + " " + lNameArr[indexPath.row]
         }
-        if let linkLabel = cell.viewWithTag(4) as? UILabel {
-            linkLabel.text = lNameArr[indexPath.row]
-        }
+       // if let linkLabel = cell.viewWithTag(4) as? UILabel {
+       //     linkLabel.text = lNameArr[indexPath.row]
+       // }
         // Circular image of person
         let img: NSURL = NSURL(string: imgArr[indexPath.row])!
         if let linkImg = cell.viewWithTag(2) as? UIImageView {
@@ -134,11 +152,45 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let thumbImg: NSURL = NSURL(string: thumbImgArr[indexPath.row])!
         if let thumbImage = cell.viewWithTag(3) as? UIImageView {
             thumbImage.hnk_setImageFromURL(thumbImg)
+            if let vidBtn = cell.viewWithTag(8) as? UIButton {
+                vidBtn.addTarget(self, action: "connected:", forControlEvents: .TouchUpInside)
+                vidBtn.tag = indexPath.row
+                
+                
+                
+            }
+            
+            
         }
+        
+        
+        
+        
+        
+        if let likeCount = cell.viewWithTag(5) as? UIButton {
+            //linkLabel.text = lNameArr[indexPath.row]
+            likeCount.setTitle(likesArr[indexPath.row] + " Likes", forState: UIControlState.Normal)
+        }
+        if let cmntCount = cell.viewWithTag(6) as? UIButton {
+            //linkLabel.text = lNameArr[indexPath.row]
+            cmntCount.setTitle(cmntArr[indexPath.row] + " Comments", forState: UIControlState.Normal)
+        }
+        if let shareCount = cell.viewWithTag(7) as? UIButton {
+            //linkLabel.text = lNameArr[indexPath.row]
+            shareCount.setTitle(shareArr[indexPath.row] + " Share", forState: UIControlState.Normal)
+        }
+        
         
         
         return cell
     }
+    
+    func connected(sender : UIButton) {
+        
+        print("bc")
+    }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
