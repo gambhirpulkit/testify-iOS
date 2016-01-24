@@ -21,6 +21,7 @@
 		E59474241C46F2130082B2B3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474231C46F2130082B2B3 /* HomeController.swift */; };
 		E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474251C46FD5F0082B2B3 /* configUrl.swift */; };
 		E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E9C48F1C4835CE007674A0 /* LogoutController.swift */; };
+		E5EDD9321C52D6A000370B17 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EDD9311C52D6A000370B17 /* HomeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		E59474231C46F2130082B2B3 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		E59474251C46FD5F0082B2B3 /* configUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configUrl.swift; sourceTree = "<group>"; };
 		E5E9C48F1C4835CE007674A0 /* LogoutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutController.swift; sourceTree = "<group>"; };
+		E5EDD9311C52D6A000370B17 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				E5E9C48F1C4835CE007674A0 /* LogoutController.swift */,
 				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
 				E59474231C46F2130082B2B3 /* HomeController.swift */,
+				E5EDD9311C52D6A000370B17 /* HomeTableViewCell.swift */,
 				E56E06A41C4AE94500F188DF /* VideoViewController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
 				E59473F81C46C61F0082B2B3 /* Assets.xcassets */,
@@ -358,6 +361,7 @@
 				E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */,
 				E59474241C46F2130082B2B3 /* HomeController.swift in Sources */,
 				E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */,
+				E5EDD9321C52D6A000370B17 /* HomeTableViewCell.swift in Sources */,
 				E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */,
 				E56E06A51C4AE94500F188DF /* VideoViewController.swift in Sources */,
 			);

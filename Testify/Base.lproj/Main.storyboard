@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
         <!--Logout Controller-->
@@ -142,7 +143,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="276" id="isH-st-U7N">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="276" id="isH-st-U7N" customClass="HomeTableViewCell" customModule="Testify" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="276"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="isH-st-U7N" id="UQR-fN-n3w">
@@ -167,13 +168,6 @@
                                                         <constraint firstAttribute="height" constant="148" id="2Eb-gp-30L"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" tag="8" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sT-D0-K9V">
-                                                    <rect key="frame" x="267" y="105" width="67" height="50"/>
-                                                    <animations/>
-                                                    <state key="normal" image="playBtn">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBD-Jx-9F4">
                                                     <rect key="frame" x="5" y="205" width="46" height="30"/>
                                                     <animations/>
@@ -201,7 +195,10 @@
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="T2t-AH-R2t" kind="show" action="showDetailViewController:sender:" id="wnu-gF-s6o"/>
+                                                        <segue destination="T2t-AH-R2t" kind="show" action="showDetailViewController:sender:" id="wnu-gF-s6o">
+                                                            <segue key="commit" inheritsFrom="parent" id="7SV-eV-Uf4"/>
+                                                            <segue key="preview" inheritsFrom="commit" id="Rrw-gQ-ns1"/>
+                                                        </segue>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJy-gW-1vi">
@@ -221,13 +218,28 @@
                                                         <segue destination="sKk-o3-xHe" kind="showDetail" id="a5P-DN-GqC"/>
                                                     </connections>
                                                 </button>
+                                                <view tag="9" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-Fl-1Qj">
+                                                    <rect key="frame" x="0.0" y="56" width="600" height="24"/>
+                                                    <animations/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button opaque="NO" tag="8" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sT-D0-K9V">
+                                                    <rect key="frame" x="267" y="105" width="67" height="50"/>
+                                                    <animations/>
+                                                    <state key="normal" image="playBtn">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstItem="rcs-JT-mhj" firstAttribute="leading" secondItem="BWz-vs-8vM" secondAttribute="trailing" constant="8" id="6ge-al-Ueq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qlb-Fl-1Qj" secondAttribute="trailing" constant="-8" id="7qn-V7-sN4"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lfs-hj-Mpq" secondAttribute="trailing" constant="-8" id="83T-WK-8Xc"/>
+                                                <constraint firstItem="v2a-kG-vl6" firstAttribute="top" secondItem="8sT-D0-K9V" secondAttribute="bottom" constant="90" id="9Qr-dc-a0O"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="v2a-kG-vl6" secondAttribute="bottom" constant="-7.5" id="B3B-Ex-FUH"/>
                                                 <constraint firstItem="8sT-D0-K9V" firstAttribute="top" secondItem="UQR-fN-n3w" secondAttribute="topMargin" constant="97" id="Dmf-6q-mAD"/>
+                                                <constraint firstItem="Qlb-Fl-1Qj" firstAttribute="leading" secondItem="UQR-fN-n3w" secondAttribute="leadingMargin" constant="-8" id="MVs-Z7-Mk7"/>
                                                 <constraint firstItem="8sT-D0-K9V" firstAttribute="centerX" secondItem="UQR-fN-n3w" secondAttribute="centerX" id="Phf-jL-QDh"/>
                                                 <constraint firstItem="lfs-hj-Mpq" firstAttribute="top" secondItem="BWz-vs-8vM" secondAttribute="bottom" constant="8" id="VLd-0K-wbq"/>
                                                 <constraint firstItem="Jr7-eq-v2E" firstAttribute="trailing" secondItem="UQR-fN-n3w" secondAttribute="trailingMargin" id="W31-fw-fLy"/>
@@ -239,8 +251,23 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="JJy-gW-1vi" secondAttribute="bottom" constant="-7.5" id="wJY-Lr-BT8"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Vec-WZ-jp9" secondAttribute="bottom" constant="-7.5" id="wZO-mv-mz2"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Dmf-6q-mAD"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <outlet property="cmntCount" destination="v2a-kG-vl6" id="W5m-Sn-mf1"/>
+                                            <outlet property="likeBtn" destination="iBD-Jx-9F4" id="F9L-03-4Vv"/>
+                                            <outlet property="likeCount" destination="Vec-WZ-jp9" id="oG2-is-ffg"/>
+                                            <outlet property="shareCount" destination="JJy-gW-1vi" id="zsZ-tq-ehm"/>
+                                            <outlet property="thumbImg" destination="lfs-hj-Mpq" id="Lnd-42-XSJ"/>
+                                            <outlet property="userImg" destination="BWz-vs-8vM" id="H2K-Lq-2XL"/>
+                                            <outlet property="userName" destination="rcs-JT-mhj" id="yHl-pQ-eNT"/>
+                                            <outlet property="vidBtn" destination="8sT-D0-K9V" id="gIj-jJ-Q21"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -305,9 +332,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="jvs-42-2yq" kind="relationship" relationship="viewControllers" id="VQp-bW-588"/>
                         <segue destination="L5S-8W-E8R" kind="relationship" relationship="viewControllers" id="fLc-c9-7Ip"/>
                         <segue destination="OfF-II-E9L" kind="relationship" relationship="viewControllers" id="4cu-Xs-lx8"/>
-                        <segue destination="jvs-42-2yq" kind="relationship" relationship="viewControllers" id="VQp-bW-588"/>
                         <segue destination="dmS-N4-I7B" kind="relationship" relationship="viewControllers" id="vAw-Nt-dgw"/>
                     </connections>
                 </tabBarController>
@@ -529,5 +556,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XYB-kh-QWK"/>
+        <segue reference="wnu-gF-s6o"/>
     </inferredMetricsTieBreakers>
 </document>

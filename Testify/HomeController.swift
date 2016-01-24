@@ -10,9 +10,10 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 import Haneke
+import Player
 
 
-class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSource, PlayerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -47,6 +48,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     var config = configUrl()
     var url : String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +100,10 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                         self.shareArr.append(shareCount)
                         
                     }
+                    if let vidPath = subJson["video_path"].string {
+                        self.vidArr.append(vidPath)
+                        
+                    }
                     
                 }
                 
@@ -126,7 +132,9 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("homeCell", forIndexPath: indexPath) 
+        let cell : HomeTableViewCell = tableView.dequeueReusableCellWithIdentifier("homeCell") as! HomeTableViewCell
+        
+        
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         if let linkLabel = cell.viewWithTag(1) as? UILabel {
@@ -148,24 +156,31 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
             linkImg.hnk_setImageFromURL(img)
             //print(imgArr[indexPath.row])
+            
+            
         }
         let thumbImg: NSURL = NSURL(string: thumbImgArr[indexPath.row])!
-        if let thumbImage = cell.viewWithTag(3) as? UIImageView {
-            thumbImage.hnk_setImageFromURL(thumbImg)
-            if let vidBtn = cell.viewWithTag(8) as? UIButton {
-                vidBtn.addTarget(self, action: "connected:", forControlEvents: .TouchUpInside)
-                vidBtn.tag = indexPath.row
-                
-                
-                
-            }
+
+        cell.thumbImg.hnk_setImageFromURL(thumbImg)
+/*        if let vidBtn = cell.viewWithTag(8) as? UIButton {
             
+            
+            vidBtn.addTarget(self, action: "connectedAction:", forControlEvents: .TouchUpInside)
+            vidBtn.tag = indexPath.row
+            
+            
+            print(indexPath.row)
             
         }
+*/
+        //print(cell)
         
+        cell.vidBtn.addTarget(self, action: "connectedAction:", forControlEvents: .TouchUpInside)
+        cell.vidBtn.tag = indexPath.row
         
+
         
-        
+
         
         if let likeCount = cell.viewWithTag(5) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
@@ -185,10 +200,100 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         return cell
     }
     
-    func connected(sender : UIButton) {
+    
+    func connectedAction(sender : UIButton) {
+        //let btnsendtag:UIButton = sender
+        //print(sender.tag)
+        //let cell = sender.superview!.superview as! UITableViewCell
+        //let cellIndexPath = self.tableView.indexPathForCell(cell)
+       // print(cellIndexPath)
+        print(sender.tag)
+        let g : NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+        let t : HomeTableViewCell = self.tableView.cellForRowAtIndexPath(g) as! HomeTableViewCell
         
-        print("bc")
+        //print(g)
+        
+        t.vidBtn.hidden = true
+        
+        var vidStr : String = ""
+        vidStr = vidArr[g.row]
+        print(vidStr)
+        //let videoUrl:NSURL = NSURL(string: vidStr)!
+        let videoUrl:NSURL = NSURL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
+        
+        
+        t.player = Player()
+        
+        t.player.view.frame = t.thumbImg.bounds
+        
+        self.addChildViewController(t.player)
+        t.thumbImg.addSubview(t.player.view)
+        t.player.didMoveToParentViewController(self)
+        
+        t.player.setUrl(videoUrl)
+        
+        t.player.playbackLoops = true
+        
+        t.thumbImg.userInteractionEnabled = true
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        t.player.view.addGestureRecognizer(tapGestureRecognizer)
+        t.thumbImg.tag = g.row
+        //print(g.row)
+        print(t.thumbImg.tag)
+        t.player.playFromBeginning()
+        // let buttonRow = sender.tag
+        
+        
+
+
+        
     }
+    
+    func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+        let playView = gestureRecognizer.view
+        let mainCell = playView?.superview
+        //let main = mainCell?.superview
+        //let cell: HomeTableViewCell = main as! HomeTableViewCell
+        //let indexPath = tableView.indexPathForCell(cell)
+        
+        let g : NSIndexPath = NSIndexPath(forRow: mainCell!.tag, inSection: 0)
+        let t : HomeTableViewCell = self.tableView.cellForRowAtIndexPath(g) as! HomeTableViewCell
+        
+        
+        //print()
+        switch (t.player.playbackState.rawValue) {
+        case PlaybackState.Stopped.rawValue:
+            t.player.playFromBeginning()
+        case PlaybackState.Paused.rawValue:
+            t.player.playFromCurrentTime()
+        case PlaybackState.Playing.rawValue:
+            t.player.pause()
+        case PlaybackState.Failed.rawValue:
+            t.player.pause()
+        default:
+            t.player.pause()
+        }
+
+    }
+    
+
+    func playerReady(player: Player) {
+    }
+    
+    func playerPlaybackStateDidChange(player: Player) {
+    }
+    
+    func playerBufferingStateDidChange(player: Player) {
+    }
+    
+    func playerPlaybackWillStartFromBeginning(player: Player) {
+    }
+    
+    func playerPlaybackDidEnd(player: Player) {
+    }
+    
+    
     
 
     
