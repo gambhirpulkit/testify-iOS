@@ -20,6 +20,34 @@
                ReferencedContainer = "container:Testify.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E59474011C46C61F0082B2B3"
+               BuildableName = "TestifyTests.xctest"
+               BlueprintName = "TestifyTests"
+               ReferencedContainer = "container:Testify.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E594740C1C46C61F0082B2B3"
+               BuildableName = "TestifyUITests.xctest"
+               BlueprintName = "TestifyUITests"
+               ReferencedContainer = "container:Testify.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

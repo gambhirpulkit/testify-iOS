@@ -8,6 +8,7 @@ target 'Testify' do
 	pod 'SwiftyJSON'
 	pod 'HanekeSwift'
 	pod 'Player'
+	pod 'CameraManager', '~> 2.1’	
 end
 
 target 'TestifyTests' do

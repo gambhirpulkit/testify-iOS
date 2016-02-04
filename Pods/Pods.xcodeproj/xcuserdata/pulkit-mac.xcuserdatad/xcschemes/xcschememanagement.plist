@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CameraManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,7 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>38A570699F4DAC6661A47663EF309CB1</key>
+		<key>2FB9DC0386CB9E6B4843355CD7F2B5B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,12 +47,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7DDF79495F24B309AF089ACC99FC1151</key>
+		<key>4FEFFF8BCFFF25082AF4A867552C5F52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8651FF4945710AADE244F0D0F2F927DC</key>
+		<key>6234C524304D650B1581F8605C760BEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7DDF79495F24B309AF089ACC99FC1151</key>
 		<dict>
 			<key>primary</key>
 			<true/>

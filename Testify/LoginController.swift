@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginEmail: UITextField!
     @IBOutlet weak var loginPwd: UITextField!
@@ -62,11 +62,28 @@ class LoginController: UIViewController {
         
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     var config = configUrl()
     var url : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginEmail.delegate = self
+        loginPwd.delegate = self
+        
+      //  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+      //  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+
+
+
         // Do any additional setup after loading the view, typically from a nib.
         url = config.url + "app_services_p.php"
         print(url)
@@ -77,6 +94,19 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y -= keyboardSize.height
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y += keyboardSize.height
+        }
+    }
     
 }
 

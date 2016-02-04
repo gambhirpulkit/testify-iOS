@@ -1,31 +1,27 @@
 //
-//  VideoPlay.swift
+//  ImageViewController.swift
 //  Testify
 //
-//  Created by Pulkit Gambhir on 1/17/16.
+//  Created by Pulkit Gambhir on 2/3/16.
 //  Copyright © 2016 Pulkit Gambhir. All rights reserved.
 //
-
+ 
 import UIKit
 import MediaPlayer
 import Player
 
-class VideoViewController: UIViewController, PlayerDelegate {
+class VideoViewController: UIViewController,PlayerDelegate {
     
     var player: Player!
     
-
+        var vidUrl: NSURL?
+    @IBOutlet weak var playView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.hidden = false
         
-     //   let bounds = UIScreen.mainScreen().bounds
-     //   let width = bounds.size.width
-       // let height = bounds.size.height
-        
-        let videoUrl:NSURL = NSURL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
-        
-        
+        print("vidUrl",vidUrl);
         self.player = Player()
         self.player.delegate = self
         self.player.view.frame = self.view.bounds
@@ -34,7 +30,7 @@ class VideoViewController: UIViewController, PlayerDelegate {
         self.view.addSubview(self.player.view)
         self.player.didMoveToParentViewController(self)
         
-        self.player.setUrl(videoUrl)
+        self.player.setUrl(vidUrl!)
         
         self.player.playbackLoops = true
         
@@ -43,9 +39,13 @@ class VideoViewController: UIViewController, PlayerDelegate {
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
         
-       // moviePlayer.controlStyle = MPMovieControlStyle.Embedded
+        func didReceiveMemoryWarning() {
+            super.didReceiveMemoryWarning()
+            // Dispose of any resources that can be recreated.
+        }
         
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -83,6 +83,6 @@ class VideoViewController: UIViewController, PlayerDelegate {
     
     func playerPlaybackDidEnd(player: Player) {
     }
-    
+
     
 }

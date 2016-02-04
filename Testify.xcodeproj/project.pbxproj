@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08823F3F9467FD9DC2695049 /* Pods_Testify.framework */; };
-		E56E06A51C4AE94500F188DF /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E06A41C4AE94500F188DF /* VideoViewController.swift */; };
+		E5123AEA1C5E54B900BB3B38 /* VideoRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */; };
+		E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */; };
+		E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */; };
+		E56BF19D1C6148A0008708F2 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56BF19C1C6148A0008708F2 /* VideoViewController.swift */; };
+		E56E06A51C4AE94500F188DF /* SampleVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E06A41C4AE94500F188DF /* SampleVideoController.swift */; };
 		E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F11C46C61F0082B2B3 /* AppDelegate.swift */; };
 		E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F31C46C61F0082B2B3 /* ViewController.swift */; };
 		E59473F71C46C61F0082B2B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59473F51C46C61F0082B2B3 /* Main.storyboard */; };
@@ -45,7 +49,12 @@
 		08823F3F9467FD9DC2695049 /* Pods_Testify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Testify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.debug.xcconfig"; sourceTree = "<group>"; };
 		35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.release.xcconfig"; sourceTree = "<group>"; };
-		E56E06A41C4AE94500F188DF /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRecordController.swift; sourceTree = "<group>"; };
+		E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVideosController.swift; sourceTree = "<group>"; };
+		E54A67DA1C63F86700EC06AD /* CameraManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CameraManager.framework; path = "Pods/../build/Debug-iphoneos/CameraManager.framework"; sourceTree = "<group>"; };
+		E56BF19C1C6148A0008708F2 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		E56E06A41C4AE94500F188DF /* SampleVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleVideoController.swift; sourceTree = "<group>"; };
 		E59473EE1C46C61F0082B2B3 /* Testify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59473F11C46C61F0082B2B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59473F31C46C61F0082B2B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +105,7 @@
 		1CD775D9BDF5FED83689046F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E54A67DA1C63F86700EC06AD /* CameraManager.framework */,
 				08823F3F9467FD9DC2695049 /* Pods_Testify.framework */,
 			);
 			name = Frameworks;
@@ -143,7 +153,11 @@
 				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
 				E59474231C46F2130082B2B3 /* HomeController.swift */,
 				E5EDD9311C52D6A000370B17 /* HomeTableViewCell.swift */,
-				E56E06A41C4AE94500F188DF /* VideoViewController.swift */,
+				E56E06A41C4AE94500F188DF /* SampleVideoController.swift */,
+				E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */,
+				E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */,
+				E56BF19C1C6148A0008708F2 /* VideoViewController.swift */,
+				E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
 				E59473F81C46C61F0082B2B3 /* Assets.xcassets */,
 				E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */,
@@ -356,14 +370,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */,
+				E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */,
 				E59474201C46E1720082B2B3 /* LoginController.swift in Sources */,
+				E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */,
 				E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */,
 				E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */,
+				E5123AEA1C5E54B900BB3B38 /* VideoRecordController.swift in Sources */,
 				E59474241C46F2130082B2B3 /* HomeController.swift in Sources */,
 				E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */,
+				E56BF19D1C6148A0008708F2 /* VideoViewController.swift in Sources */,
 				E5EDD9321C52D6A000370B17 /* HomeTableViewCell.swift in Sources */,
 				E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */,
-				E56E06A51C4AE94500F188DF /* VideoViewController.swift in Sources */,
+				E56E06A51C4AE94500F188DF /* SampleVideoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +522,11 @@
 			baseConfigurationReference = 2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Testify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -517,6 +540,11 @@
 			baseConfigurationReference = 35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Testify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
