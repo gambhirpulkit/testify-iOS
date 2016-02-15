@@ -9,6 +9,8 @@
 
 import UIKit
 import CameraManager
+import SwiftyJSON
+import Alamofire
 
 class VideoRecordController: UIViewController {
     
@@ -167,6 +169,9 @@ class VideoRecordController: UIViewController {
     }
     }
     */
+    
+
+    
 }
 
 
