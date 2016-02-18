@@ -11,11 +11,15 @@ import MediaPlayer
 import Player
 import SwiftyJSON
 import Alamofire
+import AssetsLibrary
 
 class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate {
     
     var player: Player!
     var config = configUrl()
+   // var config = configUrl()
+    var insertVidUrl : String?
+    
 
     
         var vidUrl: NSURL?
@@ -24,8 +28,10 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = false
+        insertVidUrl = config.url + "app_services_p.php"
+        print("insertVidUrl",insertVidUrl)
         
-       // self.doneBtn
+        
         
         func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
@@ -92,18 +98,65 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         print("bc")
        // print(sender.tag)
         print(vidUrl!)
-        let urlString = vidUrl!.absoluteString
+        let urlString: String = vidUrl!.absoluteString
+        print("urlString",urlString)
+        let testVar = ALAssetsLibrary()
+        var assetUrl: NSURL?
+        var assetRep: ALAssetRepresentation?
+    
+        testVar.assetForURL(vidUrl, resultBlock: {
+            (asset: ALAsset!) in
+            if asset != nil {
+                assetRep = asset.defaultRepresentation()
+                 assetUrl = assetRep!.url()
+                    print("assetRep",assetUrl)
+            }
+            }, failureBlock: {
+                (error: NSError!) in
+                
+                NSLog("Error!")
+            }
+        )
+        
+       // let testUrl: ALAssetsLibraryWriteVideoCompletionBlock?
+/*         
+       testVar!.writeVideoAtPathToSavedPhotosAlbum(vidUrl!, completionBlock: {(url: NSURL!, error: NSError!)  in
+            print("URL %@");
+            if error != nil{
+            }
+        })
+*/
+        
+        
+        /* Extract url from localvideo */
+        let components = NSURLComponents(URL: self.vidUrl!, resolvingAgainstBaseURL: false)
+        let queryItems = components!.queryItems!
+        
+        let id = queryItems.filter({$0.name == "id"}).first?.value
+        let ext = queryItems.filter({$0.name == "ext"}).first?.value
+        let vidFileName = id! + "." + ext!
+        let thumbFileName = id! + ".png"
+        let vidUrlName = config.url + "uploads/" + vidFileName
+        let thumbUrlName = config.url + "uploads/" + thumbFileName
         
         let URL = config.url + "fileUpload.php"
         
         print(vidDescField.text)
         print(tagUsersField.text)
         
-        let location = NSString(string:urlString).stringByExpandingTildeInPath
-
-        print("fileContent",location)
-        let data = (location as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+        print("assetUrl",assetUrl)
         
+        let location = NSString(string:urlString).stringByExpandingTildeInPath
+        
+        print("fileContent",location)
+        let data = (location as NSString).dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)
+        
+
+        
+        let thumbImg : UIImage = previewImageForLocalVideo(vidUrl!)!
+        print("thumbImg",thumbImg)
+        let thumbData = UIImageJPEGRepresentation(thumbImg, 0.5)
+        //print("thumbData",thumbData)
         
         let optData:NSData? = data
         
@@ -115,16 +168,11 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
 
             if let vidData = optData {
                 print("vidData",vidData)
-                let components = NSURLComponents(URL: self.vidUrl!, resolvingAgainstBaseURL: false)
-                let queryItems = components!.queryItems!
-                
-                let id = queryItems.filter({$0.name == "id"}).first?.value
-                let ext = queryItems.filter({$0.name == "ext"}).first?.value
+
                 
                // print("id val", id!)
                // print("ext val",ext!)
-                
-                let vidFileName = id! + "." + ext!
+
                 
                 
                 print("queryItems",vidFileName)
@@ -132,6 +180,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
                     multipartFormData.appendBodyPart(data: vidData, name: "image", fileName: vidFileName, mimeType: "video/mp4")
                
             }
+
             
             },    encodingCompletion: { encodingResult in
                 switch encodingResult {
@@ -144,7 +193,87 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
                 }
         })
         
+        Alamofire.upload(.POST, URL, multipartFormData: {
+            multipartFormData in
+
+            if let imgData = thumbData {
+                //print("vidData",vidData)
+
+                
+                // print("id val", id!)
+                // print("ext val",ext!)
+                
+                
+                
+                print("queryItems",thumbFileName)
+                
+                multipartFormData.appendBodyPart(data: imgData, name: "image", fileName: thumbFileName, mimeType: "image/png")
+                
+            }
+            
+            },    encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                    }
+                case .Failure(let encodingError):
+                    print(encodingError)
+                }
+        })
+       // print("")
+        let param = ["do": "InsertVideos", "user_id" : 1, "story": vidDescField.text!, "sentiment" : "1","share_user_id" : 1, "video_path": vidUrlName, "thumb_path": thumbUrlName]
+  
+        Alamofire.request(.POST, insertVidUrl!, parameters: param as? [String : AnyObject]).responseJSON { (responseData) -> Void in
+            let swiftyJsonVar = JSON(responseData.result.value!)
+            
+            print("jsonResponse" ,swiftyJsonVar);
+            let resData = swiftyJsonVar["ResponseCode"].stringValue
+            //print(resData[0]["phone"])
+            if(Int(resData)! == 1) {
+
+                
+            }
+            else if(Int(resData)! == 2) {
+                
+                let alert = UIAlertController(title: "Video upload Failed!", message:"Please try again!", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
+                    // PERFORM ACTION
+                    })
+                self.presentViewController(alert, animated: true){}
+                
+            }
+            
+        }
+        
+        
        // print(fileURL)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+
+    }
+    
+    func previewImageForLocalVideo(url:NSURL) -> UIImage?
+    {
+        let asset = AVAsset(URL: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        var time = asset.duration
+        //If possible - take not the first frame (it could be completely black or white on camara's videos)
+        time.value = min(time.value, 2)
+        
+        do {
+            let imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime: nil)
+            return UIImage(CGImage: imageRef)
+        }
+        catch
+        {
+            //let error: NSError?
+            print("Image generation failed with error ")
+            return nil
+        }
     }
 
 
@@ -177,6 +306,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             self.player.pause()
         }
     }
+    
     
     func playerReady(player: Player) {
     }

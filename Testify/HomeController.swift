@@ -54,7 +54,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         super.viewDidLoad()
         url = config.url + "app_services_p.php"
         print(url! + "url")
-        let param = ["do": "AllVideos", "user_id": "159", "id": "0","status": "up"]
+        let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]
         
         Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
             
@@ -217,7 +217,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         var vidStr : String = ""
         vidStr = vidArr[g.row]
-        print(vidStr)
+        print("vidStr",vidStr)
         //let videoUrl:NSURL = NSURL(string: vidStr)!
         let videoUrl:NSURL = NSURL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
         

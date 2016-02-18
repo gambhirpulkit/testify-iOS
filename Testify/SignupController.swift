@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 
-class SignupController: UIViewController {
+class SignupController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
@@ -67,7 +67,14 @@ class SignupController: UIViewController {
         
     }
     
-
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     
     var config = configUrl()
@@ -75,6 +82,11 @@ class SignupController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstName.delegate = self
+        lastName.delegate = self
+        email.delegate = self
+        password.delegate = self
+        email.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         url = config.url + "app_services_p.php"
         print(url)

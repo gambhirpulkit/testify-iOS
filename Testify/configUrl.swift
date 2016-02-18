@@ -10,5 +10,5 @@ import Foundation
 
 class configUrl {
     
-    var url: String = "http://bille.in/Scribzoo/"
+    var url: String = "http://192.168.0.18:8888/send/Scribzoo/"
 }
