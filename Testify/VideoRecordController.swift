@@ -118,6 +118,7 @@ class VideoRecordController: UIViewController {
                     self.cameraManager.showErrorBlock(erTitle: "Error occurred", erMessage: errorOccured.localizedDescription)
                 }
                 else {
+                    //self.cameraManager.writeFilesToPhoneLibrary = true
                     let vc: VideoViewController? = self.storyboard?.instantiateViewControllerWithIdentifier("ImageVC") as? VideoViewController
                     if let validVC: VideoViewController = vc {
                         if let capturedImage = videoURL {

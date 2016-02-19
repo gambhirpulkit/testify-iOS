@@ -12,6 +12,8 @@ import Player
 import SwiftyJSON
 import Alamofire
 import AssetsLibrary
+import AVFoundation
+//import AVAsset
 
 class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate {
     
@@ -19,7 +21,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     var config = configUrl()
    // var config = configUrl()
     var insertVidUrl : String?
-    
+    var assetData : NSData?
 
     
         var vidUrl: NSURL?
@@ -31,6 +33,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         insertVidUrl = config.url + "app_services_p.php"
         print("insertVidUrl",insertVidUrl)
         
+
         
         
         func didReceiveMemoryWarning() {
@@ -100,24 +103,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         print(vidUrl!)
         let urlString: String = vidUrl!.absoluteString
         print("urlString",urlString)
-        let testVar = ALAssetsLibrary()
-        var assetUrl: NSURL?
-        var assetRep: ALAssetRepresentation?
-    
-        testVar.assetForURL(vidUrl, resultBlock: {
-            (asset: ALAsset!) in
-            if asset != nil {
-                assetRep = asset.defaultRepresentation()
-                 assetUrl = assetRep!.url()
-                    print("assetRep",assetUrl)
-            }
-            }, failureBlock: {
-                (error: NSError!) in
-                
-                NSLog("Error!")
-            }
-        )
-        
+
        // let testUrl: ALAssetsLibraryWriteVideoCompletionBlock?
 /*         
        testVar!.writeVideoAtPathToSavedPhotosAlbum(vidUrl!, completionBlock: {(url: NSURL!, error: NSError!)  in
@@ -144,13 +130,6 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         print(vidDescField.text)
         print(tagUsersField.text)
         
-        print("assetUrl",assetUrl)
-        
-        let location = NSString(string:urlString).stringByExpandingTildeInPath
-        
-        print("fileContent",location)
-        let data = (location as NSString).dataUsingEncoding(NSUTF32StringEncoding, allowLossyConversion: false)
-        
 
         
         let thumbImg : UIImage = previewImageForLocalVideo(vidUrl!)!
@@ -158,29 +137,29 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         let thumbData = UIImageJPEGRepresentation(thumbImg, 0.5)
         //print("thumbData",thumbData)
         
-        let optData:NSData? = data
-        
-        print("optData",optData)
-        
+        /* video upload and conversion to NSData */
+        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
+        print("exportPath",exportPath)
+        let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)
+
+        let vidAsset = AVAsset(URL: vidUrl!)
+        let vidExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPreset640x480)!
+        vidExp.outputURL = exportUrl
+        vidExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+        vidExp.exportAsynchronouslyWithCompletionHandler({
+        switch vidExp.status{
+        case  AVAssetExportSessionStatus.Failed:
+        print("failed \(vidExp.error)")
+        case AVAssetExportSessionStatus.Cancelled:
+        print("cancelled \(vidExp.error)")
+        default:
+        self.assetData = NSData(contentsOfURL: vidExp.outputURL!)
+            
+        /*  upload video */
         Alamofire.upload(.POST, URL, multipartFormData: {
             multipartFormData in
-
-
-            if let vidData = optData {
-                print("vidData",vidData)
-
-                
-               // print("id val", id!)
-               // print("ext val",ext!)
-
-                
-                
-                print("queryItems",vidFileName)
-                
-                    multipartFormData.appendBodyPart(data: vidData, name: "image", fileName: vidFileName, mimeType: "video/mp4")
-               
-            }
-
+            multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
+            
             
             },    encodingCompletion: { encodingResult in
                 switch encodingResult {
@@ -192,6 +171,18 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
                     print(encodingError)
                 }
         })
+            /* end upload video */
+        // print("assetData",self.assetData)
+        }
+        })
+        
+        print("exportURL",exportUrl.absoluteString)
+        /* end video upload and conversion to NSData */
+
+        //   print("assetData1",self.assetData)
+
+
+
         
         Alamofire.upload(.POST, URL, multipartFormData: {
             multipartFormData in

@@ -219,7 +219,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         vidStr = vidArr[g.row]
         print("vidStr",vidStr)
         //let videoUrl:NSURL = NSURL(string: vidStr)!
-        let videoUrl:NSURL = NSURL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
+        let videoUrl:NSURL = NSURL(string: vidStr)!
         
         
         t.player = Player()
