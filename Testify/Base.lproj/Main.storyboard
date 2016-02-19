@@ -319,7 +319,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="eTV-BV-qFK">
             <objects>
-                <tabBarController id="r0t-sj-nbp" customClass="TabBarController" customModule="Testify" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="afterUpload" id="r0t-sj-nbp" customClass="TabBarController" customModule="Testify" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7in-93-rKs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

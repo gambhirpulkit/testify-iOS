@@ -233,7 +233,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         t.player.setUrl(videoUrl)
         
         t.player.playbackLoops = true
-        
+        t.player.fillMode = "AVLayerVideoGravityResizeAspect"
         t.thumbImg.userInteractionEnabled = true
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
         tapGestureRecognizer.numberOfTapsRequired = 1

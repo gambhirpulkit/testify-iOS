@@ -156,26 +156,38 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         self.assetData = NSData(contentsOfURL: vidExp.outputURL!)
             
         /*  upload video */
-        Alamofire.upload(.POST, URL, multipartFormData: {
-            multipartFormData in
-            multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
-            
-            
-            },    encodingCompletion: { encodingResult in
+        Alamofire.upload(
+            .POST,
+            URL,
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
+            },
+            encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .Success(let upload, _, _):
-                    upload.responseJSON { response in
-                        debugPrint(response)
+                    upload.progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
+                        print(totalBytesWritten)
+                        print("totalBytesExpectedToWrite",totalBytesExpectedToWrite)
+                        // This closure is NOT called on the main queue for performance
+                        // reasons. To update your ui, dispatch to the main queue.
+                        dispatch_async(dispatch_get_main_queue()) {
+                            print("total length",self.assetData!.length)
+                         
+                        }
+                        }
+                        .responseJSON { response in
+                            debugPrint(response)
                     }
                 case .Failure(let encodingError):
                     print(encodingError)
                 }
-        })
+            }
+            )
             /* end upload video */
         // print("assetData",self.assetData)
         }
         })
-        
+        //multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
         print("exportURL",exportUrl.absoluteString)
         /* end video upload and conversion to NSData */
 
@@ -236,7 +248,15 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             }
             
         }
-        
+        let vc: TabBarController? = self.storyboard?.instantiateViewControllerWithIdentifier("afterUpload") as? TabBarController
+        if let validVC: TabBarController = vc {
+            self.presentViewController(validVC, animated: true, completion: nil)
+/*            if let capturedImage = videoURL {
+                validVC.vidUrl = capturedImage
+                
+            }
+*/
+        }
         
        // print(fileURL)
     }
