@@ -532,9 +532,9 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
     private func _currentVideoOrientation() -> AVCaptureVideoOrientation {
         switch UIDevice.currentDevice().orientation {
         case .LandscapeLeft:
-            return .LandscapeRight
+            return .Portrait
         case .LandscapeRight:
-            return .LandscapeLeft
+            return .Portrait
         default:
             return .Portrait
         }

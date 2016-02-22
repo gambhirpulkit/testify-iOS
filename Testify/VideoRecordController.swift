@@ -11,6 +11,7 @@ import UIKit
 import CameraManager
 import SwiftyJSON
 import Alamofire
+import AVFoundation
 
 class VideoRecordController: UIViewController {
     
@@ -29,7 +30,16 @@ class VideoRecordController: UIViewController {
     @IBOutlet weak var askForPermissionsLabel: UILabel!
     
     
+    
+    
     // MARK: - UIViewController
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +48,7 @@ class VideoRecordController: UIViewController {
         
         askForPermissionsButton.hidden = true
         askForPermissionsLabel.hidden = true
+        
         
         cameraManager.cameraOutputQuality = .High
         
@@ -65,6 +76,8 @@ class VideoRecordController: UIViewController {
         
         navigationController?.navigationBar.hidden = true
         cameraManager.resumeCaptureSession()
+        
+        cameraManager
     }
     
     override func viewWillDisappear(animated: Bool) {

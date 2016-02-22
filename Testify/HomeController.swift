@@ -184,15 +184,15 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         if let likeCount = cell.viewWithTag(5) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
-            likeCount.setTitle(likesArr[indexPath.row] + " Likes", forState: UIControlState.Normal)
+            likeCount.setTitle(likesArr[indexPath.row] , forState: UIControlState.Normal)
         }
         if let cmntCount = cell.viewWithTag(6) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
-            cmntCount.setTitle(cmntArr[indexPath.row] + " Comments", forState: UIControlState.Normal)
+            cmntCount.setTitle(cmntArr[indexPath.row] , forState: UIControlState.Normal)
         }
         if let shareCount = cell.viewWithTag(7) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
-            shareCount.setTitle(shareArr[indexPath.row] + " Share", forState: UIControlState.Normal)
+            shareCount.setTitle(shareArr[indexPath.row] , forState: UIControlState.Normal)
         }
         
         

@@ -57,7 +57,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("vidUrl",vidUrl);
+        print("vidUrl",vidUrl)
         self.player = Player()
         self.player.delegate = self
         self.player.view.frame = self.playView.bounds
@@ -138,12 +138,44 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         //print("thumbData",thumbData)
         
         /* video upload and conversion to NSData */
+        let vidAsset = AVAsset(URL: vidUrl!)
+        let clipVideoTrack = vidAsset.tracksWithMediaType(AVMediaTypeVideo).first! as AVAssetTrack
+        
+        let composition = AVMutableComposition()
+        composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
+        
+        let videoComposition = AVMutableVideoComposition()
+        
+        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height)
+        print("height",clipVideoTrack.naturalSize.width)
+        videoComposition.frameDuration = CMTimeMake(1, 30)
+        
+        
+        let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
+        
+        let instruction = AVMutableVideoCompositionInstruction()
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
+        
+        let transform1: CGAffineTransform = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, 0)
+        print("")
+        let transform2 = CGAffineTransformRotate(transform1, CGFloat(M_PI_2))
+        let finalTransform = transform2
+        
+        
+        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
+        
+        instruction.layerInstructions = [transformer]
+        videoComposition.instructions = [instruction]
+
+        
+      
         let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
         print("exportPath",exportPath)
         let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)
 
-        let vidAsset = AVAsset(URL: vidUrl!)
-        let vidExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPreset640x480)!
+        
+        let vidExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetHighestQuality)!
+        vidExp.videoComposition = videoComposition
         vidExp.outputURL = exportUrl
         vidExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
         vidExp.exportAsynchronouslyWithCompletionHandler({
