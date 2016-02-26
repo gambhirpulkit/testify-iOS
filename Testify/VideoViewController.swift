@@ -23,9 +23,18 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     var insertVidUrl : String?
     var assetData : NSData?
 
+    @IBOutlet weak var trimVid: UIButton!
+    @IBOutlet weak var happyBtn: UIButton!
+    @IBOutlet weak var sadBtn: UIButton!
+    @IBOutlet weak var editBar: UIView!
+    @IBOutlet weak var textField: UITextField!
+    var sentiment: Int?
     
         var vidUrl: NSURL?
     @IBOutlet weak var playView: UIView!
+    
+    var reg_id: Int?
+    var prefs:NSUserDefaults?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +42,13 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         insertVidUrl = config.url + "app_services_p.php"
         print("insertVidUrl",insertVidUrl)
         
-
+        prefs = NSUserDefaults.standardUserDefaults()
+        print("regId video view",prefs!.integerForKey("reg_id"))
+        reg_id = prefs!.integerForKey("reg_id")
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         
         
         func didReceiveMemoryWarning() {
@@ -41,6 +56,28 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             // Dispose of any resources that can be recreated.
         }
         
+    }
+    
+    var keyboardStatus: Int = 0
+    func keyboardWillShow(notification: NSNotification) {
+        print("test",keyboardStatus)
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if(keyboardStatus == 0) {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        keyboardStatus = 1
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        print("test1",keyboardStatus)
+        keyboardStatus = 0
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            
+            self.view.frame.origin.y += keyboardSize.height
+            
+        }
     }
 
     @IBOutlet weak var doneBtn: UIButton!
@@ -57,6 +94,12 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        vidDescField.attributedPlaceholder = NSAttributedString(string:"What would you call this video?",
+            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        tagUsersField.attributedPlaceholder = NSAttributedString(string:"Tag users",
+            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        
         print("vidUrl",vidUrl)
         self.player = Player()
         self.player.delegate = self
@@ -79,6 +122,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         //self.vidDetails.backgroundColor = UIColor(white: 1, alpha: 0.9)
         self.playView.addSubview(self.vidDetails)
+        self.playView.addSubview(self.editBar)
                         print("check bc")
         self.vidDetails.addSubview(self.doneBtn)
         self.vidDetails.addSubview(self.cancelBtn)
@@ -86,15 +130,85 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         self.vidDetails.addSubview(self.vidDescField)
         self.vidDetails.addSubview(self.tagUsersField)
         print("ab bc")
+        self.happyBtn.alpha = 1.0
+        self.sadBtn.alpha = 1.0
+        self.vidDetails.addSubview(self.happyBtn)
+        self.vidDetails.addSubview(self.sadBtn)
         self.tagUsersField.delegate = self
         self.vidDescField.delegate = self
 
-        
         self.doneBtn.addTarget(self, action: "goNext:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.cancelBtn.addTarget(self, action: "goHome:", forControlEvents: UIControlEvents.TouchUpInside)
        // self.doneBtn.tag = 1
+        self.happyBtn.addTarget(self, action: "happyAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.sadBtn.addTarget(self, action: "sadAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.editBar.addSubview(self.trimVid)
+        self.trimVid.addTarget(self, action: "trimVidAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         
     }
     
+    func trimVidAction(sender:UIButton) {
+        var alert = UIAlertController(title: "Alert Title", message: "Alert Message", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addTextFieldWithConfigurationHandler(configurationTextField)
+        
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel, handler:handleCancel))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
+            print("User click Ok button")
+            print(self.textField.text)
+        }))
+        self.presentViewController(alert, animated: true, completion: {
+            print("completion block")
+        })
+
+        
+    }
+    func configurationTextField(textField: UITextField!)
+    {
+        print("configurat hire the TextField")
+        
+        if let tField = textField {
+            //self.textField.frame = CGRectMake(50, 70, 200, 30)
+            self.textField = textField!        //Save reference to the UITextField
+            self.textField.text = "Hello world"
+        }
+    }
+    
+    
+    func handleCancel(alertView: UIAlertAction!)
+    {
+        print("User click Cancel button")
+        print(self.textField.text)
+    }
+
+    
+    
+    func happyAction(sender:UIButton) {
+        print("happyAction")
+        sadBtn.transform = CGAffineTransformMakeScale(1,1)
+        UIButton.setAnimationDuration(0.6)
+        sender.transform = CGAffineTransformMakeScale(1.5,1.5)
+        sentiment = 1
+        
+    }
+    func sadAction(sender:UIButton) {
+        print("sadAction")
+        happyBtn.transform = CGAffineTransformMakeScale(1,1)
+        UIButton.setAnimationDuration(0.6)
+        sender.transform = CGAffineTransformMakeScale(1.5,1.5)
+        sentiment = 0
+        
+    }
+    
+    
+    
+    func goHome(sender:UIButton) {
+        let vc: TabBarController? = self.storyboard?.instantiateViewControllerWithIdentifier("afterUpload") as? TabBarController
+        self.presentViewController(vc!, animated: true, completion: nil)
+
+    }
     
     
     func goNext(sender:UIButton) {
@@ -113,6 +227,15 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         })
 */
         
+        guard (sentiment == 0 || sentiment == 1 ) else {
+            let alert = UIAlertController(title: "Enter all fields", message:"Please enter all the fields to proceed", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
+                // PERFORM ACTION
+                })
+            self.presentViewController(alert, animated: true){}
+            return
+        }
+
         
         /* Extract url from localvideo */
         let components = NSURLComponents(URL: self.vidUrl!, resolvingAgainstBaseURL: false)
@@ -256,8 +379,9 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
                     print(encodingError)
                 }
         })
-       // print("")
-        let param = ["do": "InsertVideos", "user_id" : 1, "story": vidDescField.text!, "sentiment" : "1","share_user_id" : 1, "video_path": vidUrlName, "thumb_path": thumbUrlName]
+        print("regId video view1",self.reg_id!)
+        
+        let param = ["do": "InsertVideos", "user_id" : self.reg_id!, "story": vidDescField.text!, "sentiment" : "\(sentiment)","share_user_id" : self.reg_id!, "video_path": vidUrlName, "thumb_path": thumbUrlName]
   
         Alamofire.request(.POST, insertVidUrl!, parameters: param as? [String : AnyObject]).responseJSON { (responseData) -> Void in
             let swiftyJsonVar = JSON(responseData.result.value!)

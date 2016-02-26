@@ -18,7 +18,8 @@ class HomeTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var thumbImg: UIImageView!
     
-    @IBOutlet weak var vidBtn: UIButton!
+   // @IBOutlet weak var vidBtn: UIButton!
+    let vidBtn = UIButton()
     
     @IBOutlet weak var likeBtn: UIButton!
     

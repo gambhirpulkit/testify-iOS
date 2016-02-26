@@ -21,5 +21,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             let vc = VideoRecordController() //change this to your class name
             self.performSegueWithIdentifier("recordControl", sender: self)
         }
+        
+
     }
 }

@@ -34,11 +34,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 
                 print("jsonResponse" ,swiftyJsonVar);
                 let resData = swiftyJsonVar["ResponseCode"].stringValue
+                let regId = swiftyJsonVar["Data"]["user_id"].stringValue
+                print("regId login",regId)
                 //print(resData[0]["phone"])
                 if(Int(resData)! == 1) {
                     let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                     //   prefs.setObject(self.userId, forKey: "USERID")
                     prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                    prefs.setInteger(Int(regId)!, forKey: "reg_id")
                     let didSave = prefs.synchronize()
                     
                     if(didSave) {
@@ -79,9 +82,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         loginEmail.delegate = self
         loginPwd.delegate = self
         
-      //  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-      //  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+            
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    
 
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -93,18 +97,25 @@ class LoginController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    var keyboardStatus: Int = 0
     func keyboardWillShow(notification: NSNotification) {
-        
+        print("test",keyboardStatus)
+
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if(keyboardStatus == 0) {
             self.view.frame.origin.y -= keyboardSize.height
+            }
         }
-        
+                keyboardStatus = 1
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        print("test1",keyboardStatus)
+        keyboardStatus = 0
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            
             self.view.frame.origin.y += keyboardSize.height
+            
         }
     }
     

@@ -27,6 +27,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     var shareArr = [String]()
     var vidArr = [String]()
     
+    var reg_id: Int?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -36,6 +37,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         print(prefs.integerForKey("ISLOGGEDIN"))
+        print("regId home1",prefs.integerForKey("reg_id"))
         if (isLoggedIn != 1) {
             self.performSegueWithIdentifier("goto_login", sender: self)
         } else {
@@ -52,18 +54,23 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        print("regId home",prefs.integerForKey("reg_id"))
+        reg_id = prefs.integerForKey("reg_id")
         url = config.url + "app_services_p.php"
         print(url! + "url")
-        let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]
+        let param = ["do": "AllVideos", "user_id": reg_id!, "id": "0","status": "up"]   //live params
+       // let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]    //testing params
         
-        Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
+        print("reg_id home2",reg_id)
+        Alamofire.request(.POST, url!, parameters: param as? [String : AnyObject]).responseJSON { (responseData) -> Void in
             
             
             switch responseData.result {
             case .Success:
                 let swiftyJsonVar = JSON(responseData.result.value!)
                 
-                print("jsonResponse" ,swiftyJsonVar);
+                print("jsonResponse home" ,swiftyJsonVar);
                 
                 
                 for (key,subJson):(String, SwiftyJSON.JSON) in swiftyJsonVar["Videos"] {
@@ -134,7 +141,15 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : HomeTableViewCell = tableView.dequeueReusableCellWithIdentifier("homeCell") as! HomeTableViewCell
         
+        cell.vidBtn.center = CGPointMake(cell.thumbImg.frame.size.width  / 2,
+            cell.thumbImg.frame.size.height / 2)
+        cell.vidBtn.frame = CGRectMake(0, 0, 300, 300)
+        // playBtn.setTitle("test", forState: UIControlState.Normal)
+        cell.vidBtn.setImage(UIImage(named: "playBtn"), forState: UIControlState.Normal)
+        cell.vidBtn.setTitleColor(UIColor.blueColor(), forState: .Normal)
         
+        cell.thumbImg.addSubview(cell.vidBtn)
+        cell.vidBtn.center = cell.thumbImg.center
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         if let linkLabel = cell.viewWithTag(1) as? UILabel {
@@ -194,7 +209,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             //linkLabel.text = lNameArr[indexPath.row]
             shareCount.setTitle(shareArr[indexPath.row] , forState: UIControlState.Normal)
         }
-        
+
         
         
         return cell
@@ -233,7 +248,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         t.player.setUrl(videoUrl)
         
         t.player.playbackLoops = true
-        t.player.fillMode = "AVLayerVideoGravityResizeAspect"
+//        t.player.fillMode = "AVLayerVideoGravityResizeAspect"
         t.thumbImg.userInteractionEnabled = true
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
         tapGestureRecognizer.numberOfTapsRequired = 1

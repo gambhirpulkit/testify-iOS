@@ -38,11 +38,16 @@ class SignupController: UIViewController, UITextFieldDelegate  {
                 
                 print("jsonResponse" ,swiftyJsonVar);
                 let resData = swiftyJsonVar["ResponseCode"].stringValue
+                let regId = swiftyJsonVar["regestration_id"]
+                
                 //print(resData[0]["phone"])
                 if(Int(resData)! == 1) {
                     let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                  //   prefs.setObject(self.userId, forKey: "USERID")
+                    print("regId",regId.int!)
                     prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                    prefs.setInteger(regId.int!, forKey: "reg_id")
+                    
                     let didSave = prefs.synchronize()
 
                     if(didSave) {
@@ -90,11 +95,38 @@ class SignupController: UIViewController, UITextFieldDelegate  {
         // Do any additional setup after loading the view, typically from a nib.
         url = config.url + "app_services_p.php"
         print(url)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    var keyboardStatus: Int = 0
+    func keyboardWillShow(notification: NSNotification) {
+        print("test",keyboardStatus)
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if(keyboardStatus == 0) {
+                self.view.frame.origin.y -= 100
+            }
+        }
+        keyboardStatus = 1
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        print("test1",keyboardStatus)
+        keyboardStatus = 0
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            
+            self.view.frame.origin.y += 100
+            
+        }
     }
     
     
