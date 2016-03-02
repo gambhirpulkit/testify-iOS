@@ -15,7 +15,7 @@ import Player
 
 
 
-class VideoPlayController: UIViewController, PlayerDelegate {
+class VideoPlayController: UIViewController, PlayerDelegate  {
     
     @IBOutlet var userImg: UIImageView!
     @IBOutlet var userName: UILabel!
@@ -94,8 +94,6 @@ class VideoPlayController: UIViewController, PlayerDelegate {
         self.vidPlayView.addSubview(playBtn)
         
     }
-    
-
     
     func playVideo(sender: UIButton) {
         

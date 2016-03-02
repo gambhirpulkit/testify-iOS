@@ -26,6 +26,8 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     var cmntArr = [String]()
     var shareArr = [String]()
     var vidArr = [String]()
+    var vidName = [String]()
+    var vidViews = [String]()
     
     var reg_id: Int?
     
@@ -111,6 +113,14 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                         self.vidArr.append(vidPath)
                         
                     }
+                    if let vidData = subJson["story"].string {
+                        self.vidName.append(vidData)
+                        
+                    }
+                    if let vidData = subJson["view"].string {
+                        self.vidViews.append(vidData)
+                        
+                    }
                     
                 }
                 
@@ -150,6 +160,9 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         cell.thumbImg.addSubview(cell.vidBtn)
         cell.vidBtn.center = cell.thumbImg.center
+        
+        cell.vidName.text = vidName[indexPath.row]
+        cell.viewsCount.text = vidViews[indexPath.row]
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         if let linkLabel = cell.viewWithTag(1) as? UILabel {
@@ -258,9 +271,6 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         print(t.thumbImg.tag)
         t.player.playFromBeginning()
         // let buttonRow = sender.tag
-        
-        
-
 
         
     }

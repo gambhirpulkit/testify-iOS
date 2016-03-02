@@ -29,6 +29,7 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     var sentiment = [String]()
     var vidStr = [String]()
 
+    var imgArr = [UIImage]()
     @IBOutlet var exploreView: UICollectionView!
     
     override func viewDidLoad() {
@@ -110,7 +111,6 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
                             print("text",self.vidStr[Int(key)!])
                         }
                         
-                        
                     }
                     
                     
@@ -136,10 +136,16 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
             }
         }  // end of Alamofire
         
+        // Attach datasource and delegate
+        self.exploreView.dataSource  = self
+        self.exploreView.delegate = self
         
+        //Layout setup
+    //    setupCollectionView()
         
     }
     
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vidName.count
     }
@@ -181,6 +187,10 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
            // print("segue data",vidName[row])
         }
     }
+    
+
+
+    
 
     
     

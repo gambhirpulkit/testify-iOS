@@ -31,6 +31,11 @@ class HomeTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var playView: UIView!
     
+    @IBOutlet var vidName: UILabel!
+    
+    @IBOutlet var viewsCount: UILabel!
+    
+    
     var player: Player!
     
 }

@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Testify/Alamofire.framework"
+  install_framework "Pods-Testify/CHTCollectionViewWaterfallLayout.framework"
   install_framework "Pods-Testify/CameraManager.framework"
   install_framework "Pods-Testify/Haneke.framework"
   install_framework "Pods-Testify/Player.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Testify/Alamofire.framework"
+  install_framework "Pods-Testify/CHTCollectionViewWaterfallLayout.framework"
   install_framework "Pods-Testify/CameraManager.framework"
   install_framework "Pods-Testify/Haneke.framework"
   install_framework "Pods-Testify/Player.framework"

@@ -162,20 +162,28 @@ class VideoRecordController: UIViewController {
                     let videoDurationSeconds: Double = CMTimeGetSeconds(self.cameraManager.recordedDuration)
                     print("videoDurationSeconds",videoDurationSeconds)
                     if(videoDurationSeconds < 30) {
-                    let vc: VideoViewController? = self.storyboard?.instantiateViewControllerWithIdentifier("ImageVC") as? VideoViewController
-                    if let validVC: VideoViewController = vc {
-                        if let capturedImage = videoURL {
-                            validVC.vidUrl = capturedImage
-                            self.presentViewController(validVC, animated: true, completion: nil)
-                        }
-                    }
+                        
+                    print("videoURL",videoURL)
+                        
+                        self.sendExportVideo(videoURL!)
+
+
                     }
                     else {
-                        let alert = UIAlertController(title: "Error! Video too long.", message:"Please record a video with duration less than 30s", preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
-                            // PERFORM ACTION
-                            })
-                        self.presentViewController(alert, animated: true){}
+
+                        let refreshAlert = UIAlertController(title: "Hola", message: "Video length is longer than 30s", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        refreshAlert.addAction(UIAlertAction(title: "Trim video", style: .Default, handler: { (action: UIAlertAction!) in
+                            print("Handle Ok logic here")
+                            self.sendExportVideo(videoURL!)
+                        }))
+                        
+                        refreshAlert.addAction(UIAlertAction(title: "Retry", style: .Default, handler: { (action: UIAlertAction!) in
+                            print("Handle Cancel Logic here")
+                        }))
+                        
+                        self.presentViewController(refreshAlert, animated: true, completion: nil)
+                       print("video longer than 30s")
                         
                         
                     }
@@ -187,6 +195,89 @@ class VideoRecordController: UIViewController {
     func timerAction() {
         ++counter
         camTimer.text = "\(counter)"
+    }
+    
+    func sendExportVideo(vidLink: NSURL) {
+        let components = NSURLComponents(URL: vidLink, resolvingAgainstBaseURL: false)
+        let queryItems = components!.queryItems!
+        
+        let id = queryItems.filter({$0.name == "id"}).first?.value
+        
+        
+        /* video upload and conversion to NSData */
+        let vidAsset = AVAsset(URL: vidLink)
+        let clipVideoTrack = vidAsset.tracksWithMediaType(AVMediaTypeVideo).first! as AVAssetTrack
+/*
+        let composition = AVMutableComposition()
+        composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
+        
+        let videoComposition = AVMutableVideoComposition()
+        
+        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height)
+        print("height",clipVideoTrack.naturalSize.width)
+        videoComposition.frameDuration = CMTimeMake(1, 30)
+        
+        
+        let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
+        
+        let instruction = AVMutableVideoCompositionInstruction()
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
+        
+        let transform1: CGAffineTransform = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, 0)
+        print("")
+        let transform2 = CGAffineTransformRotate(transform1, CGFloat(M_PI_2))
+        let finalTransform = transform2
+        
+        
+        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
+        
+        instruction.layerInstructions = [transformer]
+        videoComposition.instructions = [instruction]
+        
+*/
+        
+        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
+        print("exportPath",exportPath)
+        let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)
+        
+        let startTime: CMTime = CMTimeMakeWithSeconds(0.0, 600)
+        let duration: CMTime = CMTimeMakeWithSeconds(30.0, 600)
+        let range: CMTimeRange = CMTimeRangeMake(startTime, duration)
+        
+        
+        let vidExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetHighestQuality)!
+    //    vidExp.videoComposition = videoComposition
+        vidExp.outputURL = exportUrl
+        vidExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+        vidExp.timeRange = range
+        vidExp.exportAsynchronouslyWithCompletionHandler({
+            switch vidExp.status{
+            case  AVAssetExportSessionStatus.Failed:
+                print("failed \(vidExp.error)")
+            case AVAssetExportSessionStatus.Cancelled:
+                print("cancelled \(vidExp.error)")
+            default:
+                // self.assetData = NSData(contentsOfURL: vidExp.outputURL!)
+                
+                /* end upload video */
+                // print("assetData",self.assetData)
+                
+                let vc: VideoViewController? = self.storyboard?.instantiateViewControllerWithIdentifier("ImageVC") as? VideoViewController
+                if let validVC: VideoViewController = vc {
+                   /*  if let capturedImage = vidLink {
+                        validVC.vidUrl = capturedImage
+                        // self.presentViewController(validVC, animated: true, completion: nil)
+                    } */
+                    validVC.vidUrl = vidLink
+                    if let capturedVideo = vidExp.outputURL {
+                        validVC.vidExpUrl = capturedVideo
+                        //    self.presentViewController(validVC, animated: true, completion: nil)
+                    }
+                    self.presentViewController(validVC, animated: true, completion: nil)
+                }
+                
+            }
+        })
     }
     
     

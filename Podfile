@@ -9,6 +9,7 @@ target 'Testify' do
 	pod 'HanekeSwift'
 	pod 'Player'
 	pod 'CameraManager', '~> 2.1’	
+	pod 'CHTCollectionViewWaterfallLayout'
 end
 
 target 'TestifyTests' do

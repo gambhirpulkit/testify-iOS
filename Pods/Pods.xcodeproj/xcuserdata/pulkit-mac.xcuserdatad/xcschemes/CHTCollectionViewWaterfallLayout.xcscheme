@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '32ACA3B99778FC97602B4D0F'
-               BlueprintName = 'CameraManager'
+               BlueprintIdentifier = '5EF3E8A017B2618400A403C1'
+               BlueprintName = 'CHTCollectionViewWaterfallLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CameraManager.framework'>
+               BuildableName = 'CHTCollectionViewWaterfallLayout.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -31,7 +31,7 @@ public enum CameraOutputQuality: Int {
 }
 
 /// Class for handling iDevices custom camera usage
-public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
+public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Public properties
     
@@ -106,6 +106,8 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
             if cameraIsSetup {
                 if cameraDevice != oldValue {
                     _updateCameraDevice(cameraDevice)
+                    _setupMaxZoomScale()
+                    _zoom(0)
                 }
             }
         }
@@ -139,6 +141,8 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
             if cameraIsSetup {
                 if cameraOutputMode != oldValue {
                     _setupOutputMode(cameraOutputMode, oldCameraOutputMode: oldValue)
+                    _setupMaxZoomScale()
+                    _zoom(0)
                 }
             }
         }
@@ -153,7 +157,7 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     // MARK: - Private properties
 
-    private weak var embedingView: UIView?
+    private weak var embeddingView: UIView?
     private var videoCompletition: ((videoURL: NSURL?, error: NSError?) -> Void)?
 
     private var sessionQueue: dispatch_queue_t = dispatch_queue_create("CameraSessionQueue", DISPATCH_QUEUE_SERIAL)
@@ -180,6 +184,10 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
     private var cameraIsSetup = false
     private var cameraIsObservingDeviceOrientation = false
 
+    private var zoomScale       = CGFloat(1.0)
+    private var beginZoomScale  = CGFloat(1.0)
+    private var maxZoomScale    = CGFloat(1.0)
+
     private var tempFilePath: NSURL = {
         let tempPath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("tempMovie").URLByAppendingPathExtension("mp4").absoluteString
         if NSFileManager.defaultManager().fileExistsAtPath(tempPath) {
@@ -188,7 +196,7 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
             } catch { }
         }
         return NSURL(string: tempPath)!
-        }()
+    }()
     
     
     // MARK: - CameraManager
@@ -210,7 +218,7 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
     }
     public func addPreviewLayerToView(view: UIView, newCameraOutputMode: CameraOutputMode, completition: (Void -> Void)?) -> CameraState {
         if _canLoadCamera() {
-            if let _ = embedingView {
+            if let _ = embeddingView {
                 if let validPreviewLayer = previewLayer {
                     validPreviewLayer.removeFromSuperlayer()
                 }
@@ -280,8 +288,8 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
                     stopAndRemoveCaptureSession()
                 }
                 _setupCamera({Void -> Void in
-                    if let validEmbedingView = self.embedingView {
-                        self._addPreviewLayerToView(validEmbedingView)
+                    if let validEmbeddingView = self.embeddingView {
+                        self._addPreviewLayerToView(validEmbeddingView)
                     }
                     self._startFollowingDeviceOrientation()
                 })
@@ -436,6 +444,61 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
         }
     }
 
+    // MARK: - UIGestureRecognizerDelegate
+    
+    private func attachZoom(view: UIView) {
+        let pinch = UIPinchGestureRecognizer(target: self, action: "_zoomStart:")
+        view.addGestureRecognizer(pinch)
+        pinch.delegate = self
+    }
+    
+    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if gestureRecognizer.isKindOfClass(UIPinchGestureRecognizer) {
+            beginZoomScale = zoomScale;
+        }
+        
+        return true
+    }
+
+    @objc
+    private func _zoomStart(recognizer: UIPinchGestureRecognizer) {
+        guard let view = embeddingView,
+            previewLayer = previewLayer
+            else { return }
+
+        var allTouchesOnPreviewLayer = true
+        let numTouch = recognizer.numberOfTouches()
+
+        for var i = 0; i < numTouch; i++ {
+            let location = recognizer.locationOfTouch(i, inView: view)
+            let convertedTouch = previewLayer.convertPoint(location, fromLayer: previewLayer.superlayer)
+            if !previewLayer.containsPoint(convertedTouch) {
+                allTouchesOnPreviewLayer = false
+                break
+            }
+        }
+        if allTouchesOnPreviewLayer {
+            _zoom(recognizer.scale)
+        }
+    }
+    
+    private func _zoom(scale: CGFloat) {
+        do {
+            let captureDevice = AVCaptureDevice.devices().first as? AVCaptureDevice
+            try captureDevice?.lockForConfiguration()
+
+            zoomScale = max(1.0, min(beginZoomScale * scale, maxZoomScale))
+            
+            captureDevice?.videoZoomFactor = zoomScale
+
+            captureDevice?.unlockForConfiguration()
+            
+        } catch {
+            print("Error locking configuration")
+        }
+    }
+    
     // MARK: - CameraManager()
 
     private func _updateTorch(flashMode: CameraFlashMode) {
@@ -522,8 +585,8 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
                 }
             }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if let validEmbedingView = self.embedingView {
-                    validPreviewLayer.frame = validEmbedingView.bounds
+                if let validEmbeddingView = self.embeddingView {
+                    validPreviewLayer.frame = validEmbeddingView.bounds
                 }
             })
         }
@@ -584,7 +647,8 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
     }
 
     private func _addPreviewLayerToView(view: UIView) {
-        embedingView = view
+        embeddingView = view
+        attachZoom(view)
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             guard let _ = self.previewLayer else {
                 return
@@ -593,6 +657,20 @@ public class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate {
             view.clipsToBounds = true
             view.layer.addSublayer(self.previewLayer!)
         })
+    }
+    
+    private func _setupMaxZoomScale() {
+        var maxZoom = CGFloat(1.0)
+        beginZoomScale = CGFloat(1.0)
+        
+        if cameraDevice == .Back {
+            maxZoom = (backCameraDevice?.activeFormat.videoMaxZoomFactor)!
+        }
+        else if cameraDevice == .Front {
+            maxZoom = (frontCameraDevice?.activeFormat.videoMaxZoomFactor)!
+        }
+
+        maxZoomScale = maxZoom
     }
 
     private func _checkIfCameraIsAvailable() -> CameraState {

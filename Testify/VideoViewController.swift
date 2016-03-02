@@ -31,6 +31,9 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     var sentiment: Int?
     
         var vidUrl: NSURL?
+    
+        var vidExpUrl: NSURL?
+    
     @IBOutlet weak var playView: UIView!
     
     var reg_id: Int?
@@ -97,7 +100,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         vidDescField.attributedPlaceholder = NSAttributedString(string:"What would you call this video?",
             attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         tagUsersField.attributedPlaceholder = NSAttributedString(string:"Tag users",
-            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()]) 
         
         
         print("vidUrl",vidUrl)
@@ -109,7 +112,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         self.playView.addSubview(self.player.view)
         self.player.didMoveToParentViewController(self)
         
-        self.player.setUrl(vidUrl!)
+        self.player.setUrl(vidExpUrl!)
         
         self.player.playbackLoops = true
 
@@ -150,7 +153,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     }
     
     func trimVidAction(sender:UIButton) {
-        var alert = UIAlertController(title: "Alert Title", message: "Alert Message", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert Title", message: "Alert Message", preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         
@@ -165,6 +168,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
 
         
     }
+    
     func configurationTextField(textField: UITextField!)
     {
         print("configurat hire the TextField")
@@ -243,7 +247,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         let id = queryItems.filter({$0.name == "id"}).first?.value
         let ext = queryItems.filter({$0.name == "ext"}).first?.value
-        let vidFileName = id! + "." + ext!
+        let vidFileName = id! + "x" + "." + ext!
         let thumbFileName = id! + ".png"
         let vidUrlName = config.url + "uploads/" + vidFileName
         let thumbUrlName = config.url + "uploads/" + thumbFileName
@@ -252,13 +256,14 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         print(vidDescField.text)
         print(tagUsersField.text)
-        
 
         
         let thumbImg : UIImage = previewImageForLocalVideo(vidUrl!)!
         print("thumbImg",thumbImg)
         let thumbData = UIImageJPEGRepresentation(thumbImg, 0.5)
         //print("thumbData",thumbData)
+        
+        
         
         /* video upload and conversion to NSData */
         let vidAsset = AVAsset(URL: vidUrl!)
@@ -289,26 +294,27 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         instruction.layerInstructions = [transformer]
         videoComposition.instructions = [instruction]
-
         
-      
-        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
+        
+        
+        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!)x.mp4")
         print("exportPath",exportPath)
         let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)
-
         
-        let vidExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetHighestQuality)!
-        vidExp.videoComposition = videoComposition
-        vidExp.outputURL = exportUrl
-        vidExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
-        vidExp.exportAsynchronouslyWithCompletionHandler({
-        switch vidExp.status{
-        case  AVAssetExportSessionStatus.Failed:
-        print("failed \(vidExp.error)")
-        case AVAssetExportSessionStatus.Cancelled:
-        print("cancelled \(vidExp.error)")
-        default:
-        self.assetData = NSData(contentsOfURL: vidExp.outputURL!)
+        
+        let videoExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetHighestQuality)!
+        videoExp.videoComposition = videoComposition
+        videoExp.outputURL = exportUrl
+        videoExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+        videoExp.exportAsynchronouslyWithCompletionHandler({
+            switch videoExp.status{
+            case  AVAssetExportSessionStatus.Failed:
+                print("failed \(videoExp.error)")
+            case AVAssetExportSessionStatus.Cancelled:
+                print("cancelled \(videoExp.error)")
+            default:
+                self.assetData = NSData(contentsOfURL: videoExp.outputURL!)
+                //print("adata",self.assetData)
             
         /*  upload video */
         Alamofire.upload(
@@ -340,14 +346,16 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             )
             /* end upload video */
         // print("assetData",self.assetData)
-        }
+        //multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
+     //   print("exportURL",exportUrl.absoluteString)
+        /* end video upload and conversion to NSData */
+
+        //   print("assetData1",self.assetData)
+            }
         })
         //multipartFormData.appendBodyPart(data: self.assetData!, name: "image", fileName: vidFileName, mimeType: "video/mp4")
         print("exportURL",exportUrl.absoluteString)
         /* end video upload and conversion to NSData */
-
-        //   print("assetData1",self.assetData)
-
 
 
         
@@ -441,6 +449,12 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             print("Image generation failed with error ")
             return nil
         }
+    }
+    
+    func sendExportVideoToServer(vidLink: NSURL) {
+       
+
+
     }
 
 
