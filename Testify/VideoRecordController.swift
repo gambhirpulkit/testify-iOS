@@ -207,35 +207,7 @@ class VideoRecordController: UIViewController {
         /* video upload and conversion to NSData */
         let vidAsset = AVAsset(URL: vidLink)
         let clipVideoTrack = vidAsset.tracksWithMediaType(AVMediaTypeVideo).first! as AVAssetTrack
-/*
-        let composition = AVMutableComposition()
-        composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
-        
-        let videoComposition = AVMutableVideoComposition()
-        
-        videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height)
-        print("height",clipVideoTrack.naturalSize.width)
-        videoComposition.frameDuration = CMTimeMake(1, 30)
-        
-        
-        let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
-        
-        let instruction = AVMutableVideoCompositionInstruction()
-        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30))
-        
-        let transform1: CGAffineTransform = CGAffineTransformMakeTranslation(clipVideoTrack.naturalSize.height, 0)
-        print("")
-        let transform2 = CGAffineTransformRotate(transform1, CGFloat(M_PI_2))
-        let finalTransform = transform2
-        
-        
-        transformer.setTransform(finalTransform, atTime: kCMTimeZero)
-        
-        instruction.layerInstructions = [transformer]
-        videoComposition.instructions = [instruction]
-        
-*/
-        
+
         let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
         print("exportPath",exportPath)
         let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)

@@ -26,6 +26,7 @@
 		E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474211C46F1E80082B2B3 /* SignupController.swift */; };
 		E59474241C46F2130082B2B3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474231C46F2130082B2B3 /* HomeController.swift */; };
 		E59474261C46FD5F0082B2B3 /* configUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59474251C46FD5F0082B2B3 /* configUrl.swift */; };
+		E5BD4B631C8970E7000369E3 /* VideoTrimController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD4B621C8970E7000369E3 /* VideoTrimController.swift */; };
 		E5C0D95D1C71AECD006A2743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C0D95C1C71AECD006A2743 /* Assets.xcassets */; };
 		E5E3A0E41C7EE6330054A243 /* NotiFeedsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E3A0E31C7EE6330054A243 /* NotiFeedsController.swift */; };
 		E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E9C48F1C4835CE007674A0 /* LogoutController.swift */; };
@@ -78,6 +79,7 @@
 		E59474211C46F1E80082B2B3 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		E59474231C46F2130082B2B3 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		E59474251C46FD5F0082B2B3 /* configUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = configUrl.swift; sourceTree = "<group>"; };
+		E5BD4B621C8970E7000369E3 /* VideoTrimController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTrimController.swift; sourceTree = "<group>"; };
 		E5C0D95C1C71AECD006A2743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../testify-iOS 2/Testify/Assets.xcassets"; sourceTree = "<group>"; };
 		E5E3A0E31C7EE6330054A243 /* NotiFeedsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotiFeedsController.swift; sourceTree = "<group>"; };
 		E5E9C48F1C4835CE007674A0 /* LogoutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				E54A8C151C7F4DB800038AFE /* VideoPlayController.swift */,
 				E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */,
 				E56BF19C1C6148A0008708F2 /* VideoViewController.swift */,
+				E5BD4B621C8970E7000369E3 /* VideoTrimController.swift */,
 				E5E3A0E31C7EE6330054A243 /* NotiFeedsController.swift */,
 				E54A8C111C7F0F4500038AFE /* NotiFeedsTableViewCell.swift */,
 				E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */,
@@ -386,6 +389,7 @@
 				E59474201C46E1720082B2B3 /* LoginController.swift in Sources */,
 				E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */,
 				E5E3A0E41C7EE6330054A243 /* NotiFeedsController.swift in Sources */,
+				E5BD4B631C8970E7000369E3 /* VideoTrimController.swift in Sources */,
 				E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */,
 				E59474221C46F1E80082B2B3 /* SignupController.swift in Sources */,
 				E5123AEA1C5E54B900BB3B38 /* VideoRecordController.swift in Sources */,

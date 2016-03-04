@@ -34,6 +34,10 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     
         var vidExpUrl: NSURL?
     
+    var vidStartTime: Double = 0
+    var vidDuration: Double = 0
+    
+    
     @IBOutlet weak var playView: UIView!
     
     var reg_id: Int?
@@ -153,7 +157,24 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     }
     
     func trimVidAction(sender:UIButton) {
-        let alert = UIAlertController(title: "Alert Title", message: "Alert Message", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        print("vid1",vidExpUrl)
+        
+        let vc: VideoTrimController? = self.storyboard?.instantiateViewControllerWithIdentifier("trimVC") as? VideoTrimController
+        if let validVC: VideoTrimController = vc {
+            /*  if let capturedImage = vidLink {
+            validVC.vidUrl = capturedImage
+            // self.presentViewController(validVC, animated: true, completion: nil)
+            } */
+            validVC.vidUrl = vidUrl
+            if let capturedVideo = vidExpUrl {
+                validVC.vidExpUrl = capturedVideo
+                //    self.presentViewController(validVC, animated: true, completion: nil)
+            }
+            self.presentViewController(validVC, animated: true, completion: nil)
+        }
+        
+    /*    let alert = UIAlertController(title: "Alert Title", message: "Alert Message", preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         
@@ -165,7 +186,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         self.presentViewController(alert, animated: true, completion: {
             print("completion block")
         })
-
+    */
         
     }
     
@@ -177,6 +198,12 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
             //self.textField.frame = CGRectMake(50, 70, 200, 30)
             self.textField = textField!        //Save reference to the UITextField
             self.textField.text = "Hello world"
+            //self.textField.borderRectForBounds(CGRect(x: 0, y: 0, width: 10, height: 20))
+            var frameRect: CGRect = self.textField.frame
+            frameRect.size.height = 20
+            frameRect.size.width = 20
+            
+            self.textField.frame = frameRect
         }
     }
     
@@ -247,7 +274,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         let id = queryItems.filter({$0.name == "id"}).first?.value
         let ext = queryItems.filter({$0.name == "ext"}).first?.value
-        let vidFileName = id! + "x" + "." + ext!
+        let vidFileName = id! + "." + ext!
         let thumbFileName = id! + ".png"
         let vidUrlName = config.url + "uploads/" + vidFileName
         let thumbUrlName = config.url + "uploads/" + thumbFileName
@@ -266,7 +293,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         
         /* video upload and conversion to NSData */
-        let vidAsset = AVAsset(URL: vidUrl!)
+        let vidAsset = AVAsset(URL: vidExpUrl!)
         let clipVideoTrack = vidAsset.tracksWithMediaType(AVMediaTypeVideo).first! as AVAssetTrack
         
         let composition = AVMutableComposition()
@@ -294,18 +321,24 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         
         instruction.layerInstructions = [transformer]
         videoComposition.instructions = [instruction]
+
+
         
         
         
-        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!)x.mp4")
+        let exportPath: NSString = NSTemporaryDirectory().stringByAppendingFormat("\(id!).mp4")
         print("exportPath",exportPath)
         let exportUrl: NSURL = NSURL.fileURLWithPath(exportPath as String)
         
         
-        let videoExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetHighestQuality)!
+        let videoExp :AVAssetExportSession = AVAssetExportSession(asset: vidAsset, presetName: AVAssetExportPresetMediumQuality)!
+        
         videoExp.videoComposition = videoComposition
         videoExp.outputURL = exportUrl
-        videoExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+       // videoExp.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+        videoExp.outputFileType = AVFileTypeQuickTimeMovie
+        videoExp.shouldOptimizeForNetworkUse = true
+        removeFileAtURLIfExists(videoExp.outputURL!)
         videoExp.exportAsynchronouslyWithCompletionHandler({
             switch videoExp.status{
             case  AVAssetExportSessionStatus.Failed:
@@ -314,7 +347,8 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
                 print("cancelled \(videoExp.error)")
             default:
                 self.assetData = NSData(contentsOfURL: videoExp.outputURL!)
-                //print("adata",self.assetData)
+                print("outputUrl",videoExp.outputURL!)
+             //   print("adata",self.assetData)
             
         /*  upload video */
         Alamofire.upload(
@@ -504,6 +538,21 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     func playerPlaybackDidEnd(player: Player) {
     }
     
+    func removeFileAtURLIfExists(url: NSURL) {
+        if let filePath = url.path {
+            let fileManager = NSFileManager.defaultManager()
+            if fileManager.fileExistsAtPath(filePath) {
+                var error: NSError?
+                
+                do {
+                    try fileManager.removeItemAtPath(filePath as String)
+                } catch {
+                    // Error - handle if required
+                    print("error")
+                }
+            }
+        }
+    }
     
     
 }
