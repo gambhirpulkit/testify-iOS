@@ -38,5 +38,10 @@ class HomeTableViewCell: UITableViewCell  {
     
     var player: Player!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbImg.image = nil
+    }
+    
 }
 

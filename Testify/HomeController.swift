@@ -148,6 +148,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         return idArr.count
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : HomeTableViewCell = tableView.dequeueReusableCellWithIdentifier("homeCell") as! HomeTableViewCell
         
@@ -206,14 +207,19 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         cell.vidBtn.addTarget(self, action: "connectedAction:", forControlEvents: .TouchUpInside)
         cell.vidBtn.tag = indexPath.row
         
-
+        cell.likeCount.setTitle(likesArr[indexPath.row] , forState: UIControlState.Normal)
+        cell.likeCount.addTarget(self, action: "showLikes:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.likeCount.tag = Int(idArr[indexPath.row])!
         
-
+        cell.cmntCount.setTitle(cmntArr[indexPath.row] , forState: UIControlState.Normal)
+        cell.cmntCount.addTarget(self, action: "showComments:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.cmntCount.tag = Int(idArr[indexPath.row])!
         
-        if let likeCount = cell.viewWithTag(5) as? UIButton {
+        
+     //   if let likeCount = cell.viewWithTag(5) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
-            likeCount.setTitle(likesArr[indexPath.row] , forState: UIControlState.Normal)
-        }
+        
+       // }
         if let cmntCount = cell.viewWithTag(6) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
             cmntCount.setTitle(cmntArr[indexPath.row] , forState: UIControlState.Normal)
@@ -228,6 +234,23 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         return cell
     }
     
+    func showLikes(sender: UIButton) {
+     print("test bc ",sender.tag)
+        let childViewController = storyboard?.instantiateViewControllerWithIdentifier("showLikes") as! LikesViewController
+        childViewController.video_id = sender.tag
+        navigationController?.pushViewController(childViewController, animated: true)
+
+    }
+    
+    func showComments(sender: UIButton) {
+        print("test bc ",sender.tag)
+        let childViewController = storyboard?.instantiateViewControllerWithIdentifier("showComments") as! CommentsViewController
+        childViewController.video_id = sender.tag
+        childViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(childViewController, animated: true)
+        
+    }
+
     
     func connectedAction(sender : UIButton) {
         //let btnsendtag:UIButton = sender
@@ -239,7 +262,8 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let g : NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let t : HomeTableViewCell = self.tableView.cellForRowAtIndexPath(g) as! HomeTableViewCell
         
-        //print(g)
+        print("test index",g)
+        print("test index1",g)
         
         t.vidBtn.hidden = true
         
@@ -248,7 +272,6 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         print("vidStr",vidStr)
         //let videoUrl:NSURL = NSURL(string: vidStr)!
         let videoUrl:NSURL = NSURL(string: vidStr)!
-        
         
         t.player = Player()
         
@@ -271,7 +294,6 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         print(t.thumbImg.tag)
         t.player.playFromBeginning()
         // let buttonRow = sender.tag
-
         
     }
     
@@ -319,7 +341,16 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     
+/*    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "likesShow") {
+            let cell = sender as! UITableViewCell
+            
+            var vc = segue.destinationViewController as! LikesViewController
+
+        }
+    }
     
+  */  
 
     
     override func didReceiveMemoryWarning() {
