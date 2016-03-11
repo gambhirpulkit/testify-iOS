@@ -14,6 +14,7 @@
 		E54A8C121C7F0F4500038AFE /* NotiFeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A8C111C7F0F4500038AFE /* NotiFeedsTableViewCell.swift */; };
 		E54A8C141C7F348C00038AFE /* ExploreVideosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A8C131C7F348C00038AFE /* ExploreVideosCell.swift */; };
 		E54A8C161C7F4DB800038AFE /* VideoPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54A8C151C7F4DB800038AFE /* VideoPlayController.swift */; };
+		E5559CA91C917FD400D0919E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5559CA81C917FD400D0919E /* ProfileViewController.swift */; };
 		E56BF19D1C6148A0008708F2 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56BF19C1C6148A0008708F2 /* VideoViewController.swift */; };
 		E56E06A51C4AE94500F188DF /* SampleVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56E06A41C4AE94500F188DF /* SampleVideoController.swift */; };
 		E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59473F11C46C61F0082B2B3 /* AppDelegate.swift */; };
@@ -65,6 +66,7 @@
 		E54A8C111C7F0F4500038AFE /* NotiFeedsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotiFeedsTableViewCell.swift; sourceTree = "<group>"; };
 		E54A8C131C7F348C00038AFE /* ExploreVideosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVideosCell.swift; sourceTree = "<group>"; };
 		E54A8C151C7F4DB800038AFE /* VideoPlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayController.swift; sourceTree = "<group>"; };
+		E5559CA81C917FD400D0919E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E56BF19C1C6148A0008708F2 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		E56E06A41C4AE94500F188DF /* SampleVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleVideoController.swift; sourceTree = "<group>"; };
 		E59473EE1C46C61F0082B2B3 /* Testify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 				E5BFABA91C8EB28000A7E6CE /* LikesViewCell.swift */,
 				E5BFABA71C8EB0E400A7E6CE /* CommentsViewController.swift */,
 				E5BFABAB1C8EB28C00A7E6CE /* CommentsViewCell.swift */,
+				E5559CA81C917FD400D0919E /* ProfileViewController.swift */,
 				E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */,
 				E59473F51C46C61F0082B2B3 /* Main.storyboard */,
 				E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */,
@@ -411,6 +414,7 @@
 				E56BF19D1C6148A0008708F2 /* VideoViewController.swift in Sources */,
 				E54A8C141C7F348C00038AFE /* ExploreVideosCell.swift in Sources */,
 				E5BFABAC1C8EB28C00A7E6CE /* CommentsViewCell.swift in Sources */,
+				E5559CA91C917FD400D0919E /* ProfileViewController.swift in Sources */,
 				E5BFABA61C8EB07100A7E6CE /* LikesViewController.swift in Sources */,
 				E5EDD9321C52D6A000370B17 /* HomeTableViewCell.swift in Sources */,
 				E54A8C161C7F4DB800038AFE /* VideoPlayController.swift in Sources */,

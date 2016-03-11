@@ -153,6 +153,12 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("exploreCell", forIndexPath: indexPath) as! ExploreVideosCell
         
+        let collectionViewWidth = self.exploreView.bounds.size.width/3
+        let collectionViewHeight = self.exploreView.bounds.size.width/3
+        cell.frame.size.width = collectionViewWidth
+        cell.frame.size.height = collectionViewHeight
+       // cell.locationLabel.frame.size.width = collectionViewWidth
+        
         let thumbImg: NSURL = NSURL(string: thumbArr[indexPath.row])!
         
         cell.vidShortName.text = vidName[indexPath.row]
@@ -161,6 +167,13 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
         
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let collectionViewWidth = self.exploreView.bounds.size.width/3
+        let collectionViewHeight = self.exploreView.bounds.size.width/3
+
+        return CGSizeMake(collectionViewWidth, collectionViewHeight)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
