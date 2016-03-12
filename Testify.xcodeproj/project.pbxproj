@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08823F3F9467FD9DC2695049 /* Pods_Testify.framework */; };
+		E50007BA1C92E75300932F56 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50007B71C92E75300932F56 /* FBSDKCoreKit.framework */; };
+		E50007BB1C92E75300932F56 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50007B81C92E75300932F56 /* FBSDKLoginKit.framework */; };
+		E50007BC1C92E75300932F56 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50007B91C92E75300932F56 /* FBSDKShareKit.framework */; };
+		E50007BE1C92FC7800932F56 /* FbLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007BD1C92FC7800932F56 /* FbLoginController.swift */; };
+		E50007C01C94125700932F56 /* FbUpdateInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007BF1C94125700932F56 /* FbUpdateInfoController.swift */; };
+		E50007C21C94128200932F56 /* FirstFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C11C94128200932F56 /* FirstFollowViewController.swift */; };
+		E50007C41C94128800932F56 /* FbInviteFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C31C94128800932F56 /* FbInviteFriendsController.swift */; };
+		E50007C61C949D8C00932F56 /* FirstFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C51C949D8C00932F56 /* FirstFollowTableViewCell.swift */; };
+		E50007C81C94ADC000932F56 /* FirstFollowHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C71C94ADC000932F56 /* FirstFollowHeaderCell.swift */; };
 		E5123AEA1C5E54B900BB3B38 /* VideoRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */; };
 		E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */; };
 		E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */; };
@@ -59,6 +68,16 @@
 		08823F3F9467FD9DC2695049 /* Pods_Testify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Testify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BFE7B4BC9CDD85A3F2CB0C0 /* Pods-Testify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.debug.xcconfig"; sourceTree = "<group>"; };
 		35C63FA2A6BF9BAB8D0040C3 /* Pods-Testify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Testify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Testify/Pods-Testify.release.xcconfig"; sourceTree = "<group>"; };
+		E50007B51C92E6E400932F56 /* Testify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Testify-Bridging-Header.h"; sourceTree = "<group>"; };
+		E50007B71C92E75300932F56 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E50007B81C92E75300932F56 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E50007B91C92E75300932F56 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		E50007BD1C92FC7800932F56 /* FbLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FbLoginController.swift; sourceTree = "<group>"; };
+		E50007BF1C94125700932F56 /* FbUpdateInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FbUpdateInfoController.swift; sourceTree = "<group>"; };
+		E50007C11C94128200932F56 /* FirstFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstFollowViewController.swift; sourceTree = "<group>"; };
+		E50007C31C94128800932F56 /* FbInviteFriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FbInviteFriendsController.swift; sourceTree = "<group>"; };
+		E50007C51C949D8C00932F56 /* FirstFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstFollowTableViewCell.swift; sourceTree = "<group>"; };
+		E50007C71C94ADC000932F56 /* FirstFollowHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstFollowHeaderCell.swift; sourceTree = "<group>"; };
 		E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRecordController.swift; sourceTree = "<group>"; };
 		E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVideosController.swift; sourceTree = "<group>"; };
@@ -101,7 +120,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E50007BC1C92E75300932F56 /* FBSDKShareKit.framework in Frameworks */,
 				9D317985617252C28A23DA9E /* Pods_Testify.framework in Frameworks */,
+				E50007BA1C92E75300932F56 /* FBSDKCoreKit.framework in Frameworks */,
+				E50007BB1C92E75300932F56 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,9 +162,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E50007B61C92E6FF00932F56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E50007B71C92E75300932F56 /* FBSDKCoreKit.framework */,
+				E50007B81C92E75300932F56 /* FBSDKLoginKit.framework */,
+				E50007B91C92E75300932F56 /* FBSDKShareKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E59473E51C46C61F0082B2B3 = {
 			isa = PBXGroup;
 			children = (
+				E50007B61C92E6FF00932F56 /* Frameworks */,
 				E59473F01C46C61F0082B2B3 /* Testify */,
 				E59474051C46C61F0082B2B3 /* TestifyTests */,
 				E59474101C46C61F0082B2B3 /* TestifyUITests */,
@@ -170,6 +203,12 @@
 				E594741F1C46E1720082B2B3 /* LoginController.swift */,
 				E59474211C46F1E80082B2B3 /* SignupController.swift */,
 				E5E9C48F1C4835CE007674A0 /* LogoutController.swift */,
+				E50007BD1C92FC7800932F56 /* FbLoginController.swift */,
+				E50007BF1C94125700932F56 /* FbUpdateInfoController.swift */,
+				E50007C11C94128200932F56 /* FirstFollowViewController.swift */,
+				E50007C71C94ADC000932F56 /* FirstFollowHeaderCell.swift */,
+				E50007C51C949D8C00932F56 /* FirstFollowTableViewCell.swift */,
+				E50007C31C94128800932F56 /* FbInviteFriendsController.swift */,
 				E59474251C46FD5F0082B2B3 /* configUrl.swift */,
 				E59474231C46F2130082B2B3 /* HomeController.swift */,
 				E5EDD9311C52D6A000370B17 /* HomeTableViewCell.swift */,
@@ -192,6 +231,7 @@
 				E59473FA1C46C61F0082B2B3 /* LaunchScreen.storyboard */,
 				E5C0D95C1C71AECD006A2743 /* Assets.xcassets */,
 				E59473FD1C46C61F0082B2B3 /* Info.plist */,
+				E50007B51C92E6E400932F56 /* Testify-Bridging-Header.h */,
 			);
 			path = Testify;
 			sourceTree = "<group>";
@@ -403,6 +443,8 @@
 				E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */,
 				E59474201C46E1720082B2B3 /* LoginController.swift in Sources */,
 				E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */,
+				E50007C81C94ADC000932F56 /* FirstFollowHeaderCell.swift in Sources */,
+				E50007C61C949D8C00932F56 /* FirstFollowTableViewCell.swift in Sources */,
 				E5E3A0E41C7EE6330054A243 /* NotiFeedsController.swift in Sources */,
 				E5BD4B631C8970E7000369E3 /* VideoTrimController.swift in Sources */,
 				E59473F21C46C61F0082B2B3 /* AppDelegate.swift in Sources */,
@@ -414,11 +456,15 @@
 				E56BF19D1C6148A0008708F2 /* VideoViewController.swift in Sources */,
 				E54A8C141C7F348C00038AFE /* ExploreVideosCell.swift in Sources */,
 				E5BFABAC1C8EB28C00A7E6CE /* CommentsViewCell.swift in Sources */,
+				E50007BE1C92FC7800932F56 /* FbLoginController.swift in Sources */,
+				E50007C41C94128800932F56 /* FbInviteFriendsController.swift in Sources */,
 				E5559CA91C917FD400D0919E /* ProfileViewController.swift in Sources */,
 				E5BFABA61C8EB07100A7E6CE /* LikesViewController.swift in Sources */,
+				E50007C21C94128200932F56 /* FirstFollowViewController.swift in Sources */,
 				E5EDD9321C52D6A000370B17 /* HomeTableViewCell.swift in Sources */,
 				E54A8C161C7F4DB800038AFE /* VideoPlayController.swift in Sources */,
 				E5E9C4901C4835CE007674A0 /* LogoutController.swift in Sources */,
+				E50007C01C94125700932F56 /* FbUpdateInfoController.swift in Sources */,
 				E54A8C121C7F0F4500038AFE /* NotiFeedsTableViewCell.swift in Sources */,
 				E56E06A51C4AE94500F188DF /* SampleVideoController.swift in Sources */,
 				E5BFABAA1C8EB28000A7E6CE /* LikesViewCell.swift in Sources */,
@@ -566,12 +612,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Testify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pulkitgambhir.Testify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Testify/Testify-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -584,12 +632,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Testify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pulkitgambhir.Testify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Testify/Testify-Bridging-Header.h";
 			};
 			name = Release;
 		};

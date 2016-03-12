@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
                 let videosCount = swiftyJsonVar["user_details"]["post"].stringValue
                     
                 let fName = swiftyJsonVar["user_details"]["first_name"].stringValue
-                let lName = swiftyJsonVar["user_details"]["last_name"].stringValue
+                let lName   = swiftyJsonVar["user_details"]["last_name"].stringValue
                 let gender = swiftyJsonVar["user_details"]["gender"].stringValue
                 let aboutUser = swiftyJsonVar["user_details"]["about_me"].stringValue
                 let username = swiftyJsonVar["user_details"]["user_name"].stringValue
@@ -127,6 +127,10 @@ class ProfileViewController: UIViewController {
         }
         
         logoutBtn.addTarget(self, action: "logoutAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let appDomain = NSBundle.mainBundle().bundleIdentifier
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+
     }
     
     func logoutAction(sender: UIButton) {

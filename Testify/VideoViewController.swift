@@ -423,7 +423,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         })
         print("regId video view1",self.reg_id!)
         
-        let param = ["do": "InsertVideos", "user_id" : self.reg_id!, "story": vidDescField.text!, "sentiment" : "\(sentiment)","share_user_id" : self.reg_id!, "video_path": vidUrlName, "thumb_path": thumbUrlName]
+        let param = ["do": "InsertVideos", "user_id" : self.reg_id!, "story": vidDescField.text!, "sentiment" : "\(sentiment)","share_user_id" : self.reg_id!, "video_path": vidUrlName, "thumb_path": thumbUrlName, "active": 1]
   
         Alamofire.request(.POST, insertVidUrl!, parameters: param as? [String : AnyObject]).responseJSON { (responseData) -> Void in
             let swiftyJsonVar = JSON(responseData.result.value!)
