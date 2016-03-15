@@ -17,6 +17,7 @@
 		E50007C41C94128800932F56 /* FbInviteFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C31C94128800932F56 /* FbInviteFriendsController.swift */; };
 		E50007C61C949D8C00932F56 /* FirstFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C51C949D8C00932F56 /* FirstFollowTableViewCell.swift */; };
 		E50007C81C94ADC000932F56 /* FirstFollowHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C71C94ADC000932F56 /* FirstFollowHeaderCell.swift */; };
+		E50007CA1C96998E00932F56 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50007C91C96998E00932F56 /* SearchViewController.swift */; };
 		E5123AEA1C5E54B900BB3B38 /* VideoRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */; };
 		E53A8AF01C5FFAD100A3D23D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */; };
 		E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */; };
@@ -78,6 +79,7 @@
 		E50007C31C94128800932F56 /* FbInviteFriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FbInviteFriendsController.swift; sourceTree = "<group>"; };
 		E50007C51C949D8C00932F56 /* FirstFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstFollowTableViewCell.swift; sourceTree = "<group>"; };
 		E50007C71C94ADC000932F56 /* FirstFollowHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstFollowHeaderCell.swift; sourceTree = "<group>"; };
+		E50007C91C96998E00932F56 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRecordController.swift; sourceTree = "<group>"; };
 		E53A8AEF1C5FFAD100A3D23D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreVideosController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				E53A8AF11C60033400A3D23D /* ExploreVideosController.swift */,
 				E54A8C131C7F348C00038AFE /* ExploreVideosCell.swift */,
 				E54A8C151C7F4DB800038AFE /* VideoPlayController.swift */,
+				E50007C91C96998E00932F56 /* SearchViewController.swift */,
 				E5123AE91C5E54B900BB3B38 /* VideoRecordController.swift */,
 				E56BF19C1C6148A0008708F2 /* VideoViewController.swift */,
 				E5BD4B621C8970E7000369E3 /* VideoTrimController.swift */,
@@ -439,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E50007CA1C96998E00932F56 /* SearchViewController.swift in Sources */,
 				E59473F41C46C61F0082B2B3 /* ViewController.swift in Sources */,
 				E53A8AF21C60033400A3D23D /* ExploreVideosController.swift in Sources */,
 				E59474201C46E1720082B2B3 /* LoginController.swift in Sources */,

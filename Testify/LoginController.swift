@@ -170,8 +170,8 @@ class LoginController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDe
                     let didSave = prefs.synchronize()
                     
                     if(didSave) {
-                        self.performSegueWithIdentifier("updateProfile", sender: self)
-                        //self.performSegueWithIdentifier("login_home", sender: sender)
+//                        self.performSegueWithIdentifier("updateProfile", sender: self)
+                        self.performSegueWithIdentifier("login_home", sender: sender)
                     }
                     print(prefs.integerForKey("ISLOGGEDIN"))
                     
@@ -216,7 +216,7 @@ class LoginController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDe
 
 
         // Do any additional setup after loading the view, typically from a nib.
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url)
         configureFacebook()
     }

@@ -51,7 +51,12 @@ class SignupController: UIViewController, UITextFieldDelegate  {
                     let didSave = prefs.synchronize()
 
                     if(didSave) {
-                        self.performSegueWithIdentifier("signup_home", sender: sender)
+                    //    self.performSegueWithIdentifier("signup_home", sender: sender)
+                        let childViewController = self.storyboard?.instantiateViewControllerWithIdentifier("follow_friends") as! FirstFollowViewController
+
+                       // print("strFbId",strFbId)
+                        
+                        self.presentViewController(childViewController, animated: true, completion: nil)
                     }
                     print(prefs.integerForKey("ISLOGGEDIN"))
 
@@ -93,7 +98,7 @@ class SignupController: UIViewController, UITextFieldDelegate  {
         password.delegate = self
         email.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)

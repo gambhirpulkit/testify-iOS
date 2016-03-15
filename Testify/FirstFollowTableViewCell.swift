@@ -18,4 +18,5 @@ class FirstFollowTableViewCell: UITableViewCell {
     
     @IBOutlet var followBtn: UIButton!
     
+    @IBOutlet var aboutUser: UILabel!
 }

@@ -30,6 +30,9 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     var vidViews = [String]()
     
     var reg_id: Int?
+    var likeStatus = 0
+    
+    var refreshControl = UIRefreshControl()
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -59,10 +62,41 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         print("regId home",prefs.integerForKey("reg_id"))
         reg_id = prefs.integerForKey("reg_id")
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url! + "url")
+        
+        // set up the refresh control
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView?.addSubview(refreshControl)
+
+        loadData()
+
+        tableView.reloadData()
+        
+    }
+    
+    func refresh(sender:AnyObject) {
+        
+        idArr.removeAll()
+        fNameArr.removeAll()
+        lNameArr.removeAll()
+        imgArr.removeAll()
+        thumbImgArr.removeAll()
+        cmntArr.removeAll()
+        shareArr.removeAll()
+        vidArr.removeAll()
+        vidName.removeAll()
+        vidViews.removeAll()
+        
+        
+       loadData()
+    }
+    
+    func loadData() {
+        
         let param = ["do": "AllVideos", "user_id": reg_id!, "id": "0","status": "up"]   //live params
-       // let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]    //testing params
+        // let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]    //testing params
         
         print("reg_id home2",reg_id)
         Alamofire.request(.POST, url!, parameters: param as? [String : AnyObject]).responseJSON { (responseData) -> Void in
@@ -81,15 +115,11 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                         self.idArr.append(vid_id)
                         print(self.idArr[Int(key)!])
                     }
-                    if let fName = subJson["first_name"].string {
+                    if let fName = subJson["main_username"].string {
                         self.fNameArr.append(fName)
                         
                     }
-                    if let lName = subJson["last_name"].string {
-                        self.lNameArr.append(lName)
-                        
-                    }
-                    if let imgPath = subJson["imagepath"].string {
+                    if let imgPath = subJson["user_imagepath"].string {
                         self.imgArr.append(imgPath)
                         
                     }
@@ -124,7 +154,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                     
                 }
                 
-
+                self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
                 
             case .Failure(let error):
@@ -138,8 +168,6 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             }
             
         }
-        tableView.reloadData()
-        
     }
     
     
@@ -167,7 +195,7 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         //cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
         if let linkLabel = cell.viewWithTag(1) as? UILabel {
-            linkLabel.text = fNameArr[indexPath.row] + " " + lNameArr[indexPath.row]
+            linkLabel.text = fNameArr[indexPath.row]
         }
        // if let linkLabel = cell.viewWithTag(4) as? UILabel {
        //     linkLabel.text = lNameArr[indexPath.row]
@@ -215,6 +243,8 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         cell.cmntCount.addTarget(self, action: "showComments:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.cmntCount.tag = Int(idArr[indexPath.row])!
         
+        cell.likeBtn.addTarget(self, action: "likeAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.likeBtn.tag = Int(idArr[indexPath.row])!
         
      //   if let likeCount = cell.viewWithTag(5) as? UIButton {
             //linkLabel.text = lNameArr[indexPath.row]
@@ -232,6 +262,13 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         
         return cell
+    }
+    
+    func likeAction(sender: UIButton) {
+        print("check like",sender.tag)
+        let g : NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+
+        
     }
     
     func showLikes(sender: UIButton) {

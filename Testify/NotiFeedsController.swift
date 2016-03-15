@@ -26,7 +26,7 @@ class NotiFeedsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url! + "url")
         let param = ["do": "notifications", "user_id": "8"]
         feedsTableView.allowsSelection = false

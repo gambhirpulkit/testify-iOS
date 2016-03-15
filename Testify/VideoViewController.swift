@@ -46,7 +46,7 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = false
-        insertVidUrl = config.url + "app_services_p.php"
+        insertVidUrl = config.url + "new_app_service.php"
         print("insertVidUrl",insertVidUrl)
         
         prefs = NSUserDefaults.standardUserDefaults()

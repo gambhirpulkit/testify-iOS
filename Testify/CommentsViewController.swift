@@ -42,7 +42,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         print("vid_id",video_id)
         navigationItem.title = "Comments"
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url! + "url")
         addCmnt.delegate = self
         

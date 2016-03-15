@@ -31,7 +31,7 @@ class LikesViewController: ViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         print("vid_id",video_id)
         navigationItem.title = "Likes"
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url! + "url")
         let param = ["do": "like_users_list", "video_id": video_id!]   //live params
         // let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]    //testing params

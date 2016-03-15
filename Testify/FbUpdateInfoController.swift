@@ -43,7 +43,7 @@ class FbUpdateInfoController: UIViewController, UITextFieldDelegate {
         print("reg_id",reg_id)
         print("fb_id",fb_id)
         
-        url = config.url + "app_services_p.php"
+        url = config.url + "new_app_service.php"
         print(url)
         
         let param = ["do": "LoginFacebook", "email": email_id!, "password": fb_id!]

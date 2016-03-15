@@ -16,6 +16,7 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     var config = configUrl()
     var url : String?
     
+    var vidId = [String]()
     var vidName = [String]()
     var thumbArr = [String]()
     var userThumb = [String]()
@@ -35,12 +36,25 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
      //   url = config.url + "app_services_p.php"                       // live url
-        url = "http://testifyapp.org/Scribzoo/" + "app_services_p.php"   // testing url
+        url = "http://testifyapp.org/Scribzoo/" + "new_app_service.php"   // testing url
         
         exploreView.backgroundColor = UIColor.whiteColor()
         
-        let param = ["do": "AllVideos_main", "id": "150"]
-    //    feedsTableView.allowsSelection = false
+        loadData(0,status: "up")
+        
+        // Attach datasource and delegate
+        self.exploreView.dataSource  = self
+        self.exploreView.delegate = self
+        
+        //Layout setup
+    //    setupCollectionView()
+        
+    }
+    
+    
+    func loadData(id: Int,status: String) {
+        let param = ["do": "AllVideos_main", "id": "\(id)", "status": status]
+        //    feedsTableView.allowsSelection = false
         
         
         Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
@@ -110,6 +124,10 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
                             self.vidStr.append(vidData)
                             print("text",self.vidStr[Int(key)!])
                         }
+                        if let vidData = subJson["id"].string {
+                            self.vidId.append(vidData)
+                            print("text",self.vidId[Int(key)!])
+                        }
                         
                     }
                     
@@ -135,16 +153,7 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
                 print(error)
             }
         }  // end of Alamofire
-        
-        // Attach datasource and delegate
-        self.exploreView.dataSource  = self
-        self.exploreView.delegate = self
-        
-        //Layout setup
-    //    setupCollectionView()
-        
     }
-    
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vidName.count
@@ -199,6 +208,18 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
             
            // print("segue data",vidName[row])
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if(indexPath.row == (vidName.count - 1)) {
+            
+            let id = vidId[indexPath.row]
+            let status = "down"
+            
+            loadData(Int(id)!, status: status)
+        }
+        
     }
     
 
