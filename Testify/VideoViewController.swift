@@ -28,6 +28,9 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
     @IBOutlet weak var sadBtn: UIButton!
     @IBOutlet weak var editBar: UIView!
     @IBOutlet weak var textField: UITextField!
+    
+    @IBOutlet weak var vidTimer: UILabel!
+    
     var sentiment: Int?
     
         var vidUrl: NSURL?
@@ -104,7 +107,10 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         vidDescField.attributedPlaceholder = NSAttributedString(string:"What would you call this video?",
             attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         tagUsersField.attributedPlaceholder = NSAttributedString(string:"Tag users",
-            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()]) 
+            attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        
+
         
         
         print("vidUrl",vidUrl)
@@ -126,6 +132,10 @@ class VideoViewController: UIViewController,PlayerDelegate, UITextFieldDelegate 
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
         
         self.player.playFromBeginning()
+        
+        
+        
+        vidTimer.text = "00:00/00:03"
         
         //self.vidDetails.backgroundColor = UIColor(white: 1, alpha: 0.9)
         self.playView.addSubview(self.vidDetails)

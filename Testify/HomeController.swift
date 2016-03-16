@@ -70,9 +70,9 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView?.addSubview(refreshControl)
 
-        loadData()
+        loadData(0, status: "up")
 
-        tableView.reloadData()
+      //  tableView.reloadData()
         
     }
     
@@ -90,12 +90,12 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         vidViews.removeAll()
         
         
-       loadData()
+       loadData(0,status: "up")
     }
     
-    func loadData() {
+    func loadData(id: Int,status: String) {
         
-        let param = ["do": "AllVideos", "user_id": reg_id!, "id": "0","status": "up"]   //live params
+        let param = ["do": "AllVideos", "user_id": reg_id!, "id": "\(id)","status": status]   //live params
         // let param = ["do": "AllVideos", "user_id": "1", "id": "0","status": "up"]    //testing params
         
         print("reg_id home2",reg_id)
@@ -185,7 +185,8 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         cell.vidBtn.frame = CGRectMake(0, 0, 300, 300)
         // playBtn.setTitle("test", forState: UIControlState.Normal)
         cell.vidBtn.setImage(UIImage(named: "playBtn"), forState: UIControlState.Normal)
-        cell.vidBtn.setTitleColor(UIColor.blueColor(), forState: .Normal)
+       // cell.vidBtn.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        cell.vidBtn.setTitle(nil, forState: UIControlState.Normal)
         
         cell.thumbImg.addSubview(cell.vidBtn)
         cell.vidBtn.center = cell.thumbImg.center
@@ -387,7 +388,22 @@ class HomeController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         }
     }
     
-  */  
+  */
+    
+    
+    /* Loading more items*/
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if(indexPath.row == (idArr.count - 1)) {
+            
+            let id = idArr[indexPath.row]
+            let status = "down"
+            
+            loadData(Int(id)!, status: status)
+        }
+
+    }
 
     
     override func didReceiveMemoryWarning() {

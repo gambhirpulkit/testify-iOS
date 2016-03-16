@@ -21,18 +21,22 @@ class NotiFeedsController: UIViewController {
     var imageArr = [String]()
     var thumbArr = [String]()
     
+    var reg_id: Int?
     
     @IBOutlet var feedsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        print("regId home",prefs.integerForKey("reg_id"))
+        reg_id = prefs.integerForKey("reg_id")
         url = config.url + "new_app_service.php"
         print(url! + "url")
-        let param = ["do": "notifications", "user_id": "8"]
+        let param = ["do": "notifications", "user_id": reg_id!]
         feedsTableView.allowsSelection = false
         
         
-        Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
+        Alamofire.request(.POST, url!, parameters: param as! [String : AnyObject]).responseJSON { (responseData) -> Void in
             
             switch responseData.result {
             case .Success:

@@ -12,9 +12,13 @@ import CameraManager
 import SwiftyJSON
 import Alamofire
 import AVFoundation
+import MobileCoreServices
+import AssetsLibrary
 
-class VideoRecordController: UIViewController {
+class VideoRecordController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    var controller = UIImagePickerController()
+    var assetsLibrary = ALAssetsLibrary()
     // MARK: - Constants
     
     let cameraManager = CameraManager()
@@ -22,6 +26,7 @@ class VideoRecordController: UIViewController {
     var counter = 0
     // MARK: - @IBOutlets
     
+    @IBOutlet weak var vidGallery: UIButton!
     @IBOutlet weak var camTimer: UILabel!
     @IBOutlet weak var cameraView: UIView!
     
@@ -77,7 +82,10 @@ class VideoRecordController: UIViewController {
                 // update some UI
             }
         }
+      //  camTimer.text = "hey"
+        //camTimer.textColor = UIColor.whiteColor()
         
+        vidGallery.addTarget(self, action: "viewLibrary:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -99,6 +107,15 @@ class VideoRecordController: UIViewController {
         cameraManager.stopCaptureSession()
     }
     
+    func viewLibrary(sender: AnyObject) {
+        // Display Photo Library
+        controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        controller.mediaTypes = [kUTTypeMovie as String]
+        controller.delegate = self
+        
+        presentViewController(controller, animated: true, completion: nil)
+    }
+
     
     // MARK: - ViewController
     
@@ -122,7 +139,7 @@ class VideoRecordController: UIViewController {
         case .Off:
             sender.setTitle("Flash Off", forState: UIControlState.Normal)
         case .On:
-            sender.setTitle("Flash On", forState: UIControlState.Normal)
+            sender.setTitle("Flash On", forState: UIControlState.Normal )
         case .Auto:
             sender.setTitle("Flash Auto", forState: UIControlState.Normal)
         }
@@ -145,18 +162,17 @@ class VideoRecordController: UIViewController {
         if sender.selected {
             sender.backgroundColor = UIColor.redColor()
             cameraManager.startRecordingVideo()
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerAction", userInfo: nil, repeats: true)
 
 
         } else {
-            
-            
             
             cameraManager.stopRecordingVideo({ (videoURL, error) -> Void in
                 if let errorOccured = error {
                     self.cameraManager.showErrorBlock(erTitle: "Error occurred", erMessage: errorOccured.localizedDescription)
                 }
                 else {
+                    self.timer.invalidate()
                     //self.cameraManager.writeFilesToPhoneLibrary = true
                     print("timer Duration",self.cameraManager.recordedDuration)
                     let videoDurationSeconds: Double = CMTimeGetSeconds(self.cameraManager.recordedDuration)
@@ -194,7 +210,12 @@ class VideoRecordController: UIViewController {
     }
     func timerAction() {
         ++counter
-        camTimer.text = "\(counter)"
+        let minutes = (counter / 60) % 60
+        let seconds = (counter) % 60
+        let text = String(format:"%02d:%02d", minutes, seconds)
+      //  let centis = time % 100
+        print("min\(minutes)"," sec\(seconds)")
+        camTimer.text = text
     }
     
     func sendExportVideo(vidLink: NSURL) {
@@ -290,6 +311,41 @@ class VideoRecordController: UIViewController {
     }
     */
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+        
+        // 1
+        let mediaType:AnyObject? = info[UIImagePickerControllerMediaType]
+        
+        if let type:AnyObject = mediaType {
+            if type is String {
+                let stringType = type as! String
+                if stringType == kUTTypeMovie as String {
+                    let urlOfVideo = info[UIImagePickerControllerMediaURL] as? NSURL
+                    if let url = urlOfVideo {
+                        // 2
+                        assetsLibrary.writeVideoAtPathToSavedPhotosAlbum(url,
+                            completionBlock: {(url: NSURL!, error: NSError!) in
+                                if let theError = error{
+                                    print("Error saving video = \(theError)")
+                                }
+                                else {
+                                    print("no errors happened",url)
+                                    self.sendExportVideo(url)
+                                }
+                        })
+                    }
+                }
+                
+            }
+        }
+        
+        // 3
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     
 }

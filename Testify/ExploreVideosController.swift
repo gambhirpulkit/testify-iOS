@@ -16,6 +16,8 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     var config = configUrl()
     var url : String?
     
+    var reg_id: Int?
+    
     var vidId = [String]()
     var vidName = [String]()
     var thumbArr = [String]()
@@ -35,8 +37,12 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        print("regId home",prefs.integerForKey("reg_id"))
+        reg_id = prefs.integerForKey("reg_id")
+        
      //   url = config.url + "app_services_p.php"                       // live url
-        url = "http://testifyapp.org/Scribzoo/" + "new_app_service.php"   // testing url
+        url = config.url + "new_app_service.php"   // testing url
         
         exploreView.backgroundColor = UIColor.whiteColor()
         
@@ -53,11 +59,11 @@ class ExploreVideosController: UIViewController, UICollectionViewDelegate, UICol
     
     
     func loadData(id: Int,status: String) {
-        let param = ["do": "AllVideos_main", "id": "\(id)", "status": status]
+        let param = ["do": "AllVideos_main", "user_id" : reg_id! ,"id": "\(id)", "status": status]
         //    feedsTableView.allowsSelection = false
         
         
-        Alamofire.request(.POST, url!, parameters: param).responseJSON { (responseData) -> Void in
+        Alamofire.request(.POST, url!, parameters: param as! [String : AnyObject]).responseJSON { (responseData) -> Void in
             
             switch responseData.result {
             case .Success:
